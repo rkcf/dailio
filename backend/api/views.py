@@ -38,6 +38,6 @@ def task_single(request, pk):
         return JsonResponse(serializer.data, status=200)
 
     #delete individual task
-    if request.method == 'DEL':
+    if request.method == 'DELETE':
         task.delete()
         return HttpResponse(status=204) 
