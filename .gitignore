@@ -7,6 +7,7 @@ dist/
 .venv
 db.sqlite3
 __pycache__/
+migrations/
 
 #frontend stuff
 webpack-stats.json
