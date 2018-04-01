@@ -1,0 +1,11 @@
+{% load render_bundle from webpack_loader %}
+<html>
+	<head>
+		<title>dailio</title>
+	</head>
+	<body>
+		{% block content %}
+		{% endblock %}
+		{% render_bundle 'app' %}
+	</body>
+</html>
