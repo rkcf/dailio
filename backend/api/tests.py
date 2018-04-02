@@ -1,6 +1,9 @@
-from rest_framework.test import APITestCase, APIRequestFactory, APIClient
+"""
+dailio api testing
+"""
+
+from rest_framework.test import APITestCase, APIClient
 from api.models import Task
-from api.views import task_list, task_single
 
 class TaskTests(APITestCase):
     """Class to test task api"""
@@ -33,6 +36,5 @@ class TaskTests(APITestCase):
 
     def test_get_invalid_task(self):
         """test getting a non existant out of range task"""
-        response = self.client.get('/api/tasks/10/')
+        response = self.client.get('/api/tasks/2/')
         self.assertEqual(response.status_code, 404)
-
