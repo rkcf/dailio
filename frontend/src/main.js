@@ -1,5 +1,8 @@
+import VueResource from 'vue-resource'
 import Vue from 'vue'
 import App from './App'
+
+Vue.use(VueResource)
 
 Vue.config.productionTip = false
 
