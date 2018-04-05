@@ -1,19 +1,27 @@
 <template>
   <div id="app">
     <div id="header">
-      <h1>dailio</h1>
+      <h1 id="title">dailio</h1>
     </div>
-    <CardContainer/>
+    <CardContainer v-on:openModal="showModal = true"/>
+    <TaskModal v-if="showModal" v-on:closeModal="showModal = false"/>
   </div>
 </template>
 
 <script>
 import CardContainer from './components/CardContainer'
+import TaskModal from './components/TaskModal'
 
 export default {
   name: 'App',
   components: {
-    CardContainer
+    CardContainer,
+    TaskModal
+  },
+  data () {
+    return {
+      showModal: false
+    }
   }
 }
 </script>
@@ -22,6 +30,7 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  border: 0;
 }
 
 #header {
