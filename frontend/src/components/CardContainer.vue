@@ -23,28 +23,17 @@
 <script>
 export default {
   name: 'CardContainer',
-  data () {
-    return {
-      tasks: []
+  computed: {
+    tasks () {
+      return this.$store.state.tasks
     }
   },
   mounted: function () {
-    this.getTasks()
+    this.$store.commit('getTasks')
   },
   methods: {
-    getTasks: function () {
-      this.$http.get('/api/tasks/')
-        .then((response) => {
-          this.tasks = response.data
-        })
-    },
     deleteTask: function (id) {
-      var fullURL = 'api/tasks/' + id + '/'
-      this.$http.delete(fullURL)
-        .then((response) => {
-          this.getTasks()
-          this.$forceUpdate()
-        })
+      this.$store.dispatch('deleteTask', id)
     }
   }
 }

@@ -1,9 +1,6 @@
-import VueResource from 'vue-resource'
 import Vue from 'vue'
 import App from './App'
 import store from './store.js'
-
-Vue.use(VueResource)
 
 Vue.config.productionTip = false
 
