@@ -41,6 +41,10 @@ export default {
     deleteTask: function (id) {
       var fullURL = 'api/tasks/' + id + '/'
       this.$http.delete(fullURL)
+        .then((response) => {
+          this.getTasks()
+          this.$forceUpdate()
+        })
     }
   }
 }
