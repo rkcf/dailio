@@ -46,4 +46,24 @@ export default {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
 }
+
+input {
+  background: #fff;
+  padding: .5Rem;
+  border: 1px #ddd solid;
+  width: 10rem;
+}
+
+.btn {
+  margin: 0;
+  background: #FC913a;
+  padding: .5rem;
+  text-transform: uppercase;
+  border: 1px #FC913a solid;
+}
+
+button:hover {
+  cursor: pointer
+}
+
 </style>

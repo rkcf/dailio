@@ -41,7 +41,6 @@ export default {
   background: #fff;
   width: 40%;
   padding: 1rem;
-  height: 300px;
   margin: 10rem auto;
 }
 

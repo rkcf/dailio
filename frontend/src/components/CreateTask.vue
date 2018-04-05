@@ -1,8 +1,12 @@
 <template>
   <div>
-    <h2>Create Task</h2>
-    <input placeholder="Task Name" v-model="taskname">
-    <button v-on:click="addTask(taskname)">Create</button>
+    <div id="modal-header">
+      <h2>Create Task</h2>
+    </div>
+    <div id="modal-body">
+      <input placeholder="Task Name" v-model="taskname"
+    ><button class="btn" v-on:click="addTask(taskname)">Create</button>
+    </div>
   </div>
 </template>
 
