@@ -1,6 +1,6 @@
 <template>
-  <diV id="task-modal">
-    <div id="modal-container">
+  <diV id="modal-container">
+    <div id="modal-content">
       <h1>Modal Header</h1>
       <button v-on:click="$emit('closeModal')">close</button>
     </div>
@@ -9,12 +9,12 @@
 
 <script>
 export default {
-  name: 'TaskModal'
+  name: 'ModalContainer'
 }
 </script>
 
 <style scoped>
-#task-modal {
+#modal-container {
   position: fixed;
   z-index: 100;
   width: 100%;
@@ -22,12 +22,10 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-#modal-container {
+#modal-content {
   background: #fff;
   width: 40%;
-  text-align: center;
   padding: 1rem;
-  vertical-align: center;
   height: 300px;
   margin: 10rem auto;
 }
