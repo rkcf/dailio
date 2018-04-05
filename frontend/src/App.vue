@@ -3,8 +3,8 @@
     <div id="header">
       <h1 id="title">dailio</h1>
     </div>
-    <CardContainer v-on:openModal="showModal = true"/>
-    <ModalContainer v-if="showModal" v-on:closeModal="showModal = false"/>
+    <CardContainer/>
+    <ModalContainer v-if="showModal"/>
   </div>
 </template>
 
@@ -18,11 +18,12 @@ export default {
     CardContainer,
     ModalContainer
   },
-  data () {
-    return {
-      showModal: false
+  computed: {
+    showModal () {
+      return this.$store.state.showModal
     }
   }
+
 }
 </script>
 

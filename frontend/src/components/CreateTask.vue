@@ -17,6 +17,9 @@ export default {
   methods: {
     addTask: function (taskname) {
       this.$http.post('/api/tasks/', {task_name: taskname})
+        .then((response) => {
+          this.$store.commit('closeModal')
+        })
     }
   }
 }
