@@ -76,4 +76,9 @@ button:hover {
   opacity: 0;
 }
 
+.input-danger {
+  color: #FF6B6B;
+  padding-top: 1rem;
+}
+
 </style>

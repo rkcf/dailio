@@ -4,8 +4,18 @@
       <h2>Create Task</h2>
     </div>
     <div id="modal-body">
-      <input placeholder="Task Name" v-model="taskname"
-    ><button class="btn" v-on:click="addTask(taskname)">Create</button>
+      <form v-on:submit.prevent="validateTaskname(taskname)">
+        <input v-validate="'required|max:50'"
+               placeholder="Task Name"
+               v-model="taskname"
+               name="taskname"
+        ><button class="btn">Create</button>
+        <transition name="fade">
+          <div class="input-danger" v-show="errors.has('taskname')">
+            {{ errors.first('taskname') }}
+          </div>
+        </transition>
+      </form>
     </div>
   </div>
 </template>
@@ -19,8 +29,12 @@ export default {
     }
   },
   methods: {
-    addTask: function (taskname) {
-      this.$store.dispatch('addTask', taskname)
+    validateTaskname: function (taskname) {
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.$store.dispatch('addTask', taskname)
+        }
+      })
     }
   }
 }
