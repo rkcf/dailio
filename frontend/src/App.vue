@@ -4,7 +4,9 @@
       <h1 id="title">dailio</h1>
     </div>
     <CardContainer/>
-    <ModalContainer v-if="showModal"/>
+    <transition name="fade">
+      <ModalContainer v-if="showModal"/>
+    </transition>
   </div>
 </template>
 
@@ -64,6 +66,14 @@ input {
 
 button:hover {
   cursor: pointer
+}
+
+.fade-leave-active, .fade-enter-active{
+  transition: opacity .2s ease;
+}
+
+.fade-enter, .fade-leave-to{
+  opacity: 0;
 }
 
 </style>
