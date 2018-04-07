@@ -7,7 +7,7 @@
           <path d="M0 0h24v24H0z" fill="none"/>
         </svg>
       </button>
-      <CreateTask v-show="$store.state.modalModule === 'create'"/>
+      <ModalTaskCreate v-show="$store.state.modalModule === 'create'"/>
       <ModalTaskDetail v-bind:task="task" v-show="$store.state.modalModule === 'detail'"/>
     </div>
   </div>
