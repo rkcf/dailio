@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import CreateTask from './CreateTask'
+import ModalTaskCreate from './ModalTaskCreate'
 import ModalTaskDetail from './ModalTaskDetail'
 
 export default {
   name: 'ModalContainer',
   components: {
-    CreateTask,
+    ModalTaskCreate,
     ModalTaskDetail
   },
   props: ['task'],
