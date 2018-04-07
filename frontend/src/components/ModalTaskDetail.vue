@@ -1,6 +1,9 @@
 <template>
-  <div>
+<div>
+  <div id="modal-header">
     <h2>{{ task.task_name }}</h2>
+  </div>
+  <div id="modal-body">
     <button class="delete-btn" v-on:click="confirmDelete = true">
       delete
     </button>
@@ -9,6 +12,7 @@
       <button class="btn" v-on:click="deleteTask(task.task_id)">Delete</button>
     </div>
   </div>
+</div>
 </template>
 
 <script>

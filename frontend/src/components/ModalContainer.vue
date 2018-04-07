@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 #modal-container {
   position: fixed;
   z-index: 100;
@@ -46,6 +46,13 @@ export default {
   width: 40%;
   padding: 1rem;
   margin: 10rem auto;
+}
+
+#modal-header {
+  margin-bottom: 1rem;
+}
+
+#modal-body {
 }
 
 #close-modal {
