@@ -7,22 +7,27 @@ Vue.use(VueResource)
 
 export default new Vuex.Store({
   state: {
-    showModal: false,
-    tasks: []
+    modalModule: '',
+    tasks: [],
+    activeTask: ''
   },
   mutations: {
     closeModal (state) {
-      state.showModal = false
+      state.modalModule = ''
     },
-    openModal (state) {
-      state.showModal = true
+    setModalModule (state, module) {
+      state.modalModule = module
     },
     getTasks (state) {
       Vue.http.get('/api/tasks/')
         .then((response) => {
           state.tasks = response.data
         })
+    },
+    setActiveTask (state, task) {
+      state.activeTask = task
     }
+
   },
   actions: {
     addTask ({ commit }, taskname) {
@@ -38,6 +43,16 @@ export default new Vuex.Store({
         .then((response) => {
           commit('getTasks')
         })
+    },
+    getTask ({ commit }, id) {
+      var fullURL = '/api/tasks/' + id + '/'
+      Vue.http.get(fullURL)
+        .then((response) => {
+          commit('setActiveTask', response.data)
+        })
+    },
+    openModal ({ commit }, module) {
+      commit('setModalModule', module)
     }
   }
 })

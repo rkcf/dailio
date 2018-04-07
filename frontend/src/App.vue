@@ -5,7 +5,7 @@
     </div>
     <CardContainer/>
     <transition name="fade">
-      <ModalContainer v-if="showModal"/>
+      <ModalContainer v-show="$store.state.modalModule"/>
     </transition>
   </div>
 </template>
