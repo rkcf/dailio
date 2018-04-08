@@ -18,6 +18,7 @@ export default {
   props: ['task'],
   methods: {
     showTaskDetail: function (id) {
+      // Open a modal to display the details of a task
       this.$store.commit('setActiveTaskId', id)
       this.$store.dispatch('openModal', 'detail')
     }
