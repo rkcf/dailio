@@ -13,24 +13,29 @@ export default new Vuex.Store({
   },
   mutations: {
     closeModal (state) {
+      // Close the modal by clearing the active modal module
       state.modalModule = ''
     },
     setModalModule (state, module) {
+      // Set the active modal module
       state.modalModule = module
     },
     getTasks (state) {
+      // Get a list of all tasks from the api
       Vue.http.get('/api/tasks/')
         .then((response) => {
           state.tasks = response.data
         })
     },
     setActiveTaskId (state, id) {
+      // Set the active task id for use with modal modules
       state.activeTaskId = id
     }
 
   },
   actions: {
     addTask ({ commit }, taskname) {
+      // Create a new task
       Vue.http.post('/api/tasks/', {task_name: taskname})
         .then((response) => {
           commit('closeModal')
@@ -38,6 +43,7 @@ export default new Vuex.Store({
         })
     },
     deleteTask ({ commit }, id) {
+      // Delete a task given its id
       var fullURL = '/api/tasks/' + id + '/'
       Vue.http.delete(fullURL)
         .then((response) => {
@@ -45,6 +51,7 @@ export default new Vuex.Store({
         })
     },
     changeTaskName ({ commit }, { id, newName }) {
+      // Change a task name with a PATCH
       var fullURL = '/api/tasks/' + id + '/'
       var payload = '{ "task_name": "' + newName + '" }'
       Vue.http.patch(fullURL, payload)
@@ -53,11 +60,13 @@ export default new Vuex.Store({
         })
     },
     openModal ({ commit }, module) {
+      // Open the modal with a specific modal module
       commit('setModalModule', module)
     }
   },
   getters: {
     getTaskById: (state) => (id) => {
+      // Return a single task from the array by id
       return state.tasks.find(task => task.task_id === id)
     }
   }
