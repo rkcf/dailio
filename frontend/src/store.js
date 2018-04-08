@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     modalModule: '',
     tasks: [],
-    activeTask: ''
+    activeTaskId: ''
   },
   mutations: {
     closeModal (state) {
@@ -24,8 +24,8 @@ export default new Vuex.Store({
           state.tasks = response.data
         })
     },
-    setActiveTask (state, task) {
-      state.activeTask = task
+    setActiveTaskId (state, id) {
+      state.activeTaskId = id
     }
 
   },
@@ -44,13 +44,6 @@ export default new Vuex.Store({
           commit('getTasks')
         })
     },
-    getTask ({ commit }, id) {
-      var fullURL = '/api/tasks/' + id + '/'
-      Vue.http.get(fullURL)
-        .then((response) => {
-          commit('setActiveTask', response.data)
-        })
-    },
     changeTaskName ({ commit }, { id, newName }) {
       var fullURL = '/api/tasks/' + id + '/'
       var payload = '{ "task_name": "' + newName + '" }'
@@ -61,6 +54,11 @@ export default new Vuex.Store({
     },
     openModal ({ commit }, module) {
       commit('setModalModule', module)
+    }
+  },
+  getters: {
+    getTaskById: (state) => (id) => {
+      return state.tasks.find(task => task.task_id === id)
     }
   }
 })

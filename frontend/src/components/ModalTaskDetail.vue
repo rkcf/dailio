@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="task">
   <div id="modal-header">
     <h2>{{ task.task_name }}</h2>
     <button v-on:click="editName = true">edit</button>
@@ -30,19 +30,19 @@ export default {
   data: function () {
     return {
       confirmDelete: false,
-      newName: '',
-      editName: false
+      editName: false,
+      newName: ''
     }
   },
   computed: {
     task () {
-      return this.$store.state.activeTask
+      return this.$store.getters.getTaskById(this.$store.state.activeTaskId)
     }
   },
   methods: {
     deleteTask: function (id) {
-      this.$store.dispatch('deleteTask', id)
       this.$store.commit('closeModal')
+      this.$store.dispatch('deleteTask', id)
       this.confirmDelete = false
     },
     changeTaskName: function (id, newName) {

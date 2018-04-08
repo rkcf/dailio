@@ -18,7 +18,7 @@ export default {
   props: ['task'],
   methods: {
     showTaskDetail: function (id) {
-      this.$store.dispatch('getTask', id)
+      this.$store.commit('setActiveTaskId', id)
       this.$store.dispatch('openModal', 'detail')
     }
   }
