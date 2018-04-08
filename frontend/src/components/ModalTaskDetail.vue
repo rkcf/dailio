@@ -2,6 +2,15 @@
 <div>
   <div id="modal-header">
     <h2>{{ task.task_name }}</h2>
+    <button v-on:click="editName = true">edit</button>
+  </div>
+  <div v-show="editName">
+    <form v-on:submit.prevent="changeTaskName(task.task_id, newName)">
+      <input name="newName"
+             v-model="newName"
+             placeholder="New Task Name?"
+      ><button class="btn">change</button>
+    </form>
   </div>
   <div id="modal-body">
     <button class="delete-btn" v-on:click="confirmDelete = true">
@@ -20,7 +29,9 @@ export default {
   name: 'ModalTaskDetail',
   data: function () {
     return {
-      confirmDelete: false
+      confirmDelete: false,
+      newName: '',
+      editName: false
     }
   },
   computed: {
@@ -33,6 +44,10 @@ export default {
       this.$store.dispatch('deleteTask', id)
       this.$store.commit('closeModal')
       this.confirmDelete = false
+    },
+    changeTaskName: function (id, newName) {
+      this.$store.dispatch('changeTaskName', { id, newName })
+      this.editName = false
     }
   }
 }

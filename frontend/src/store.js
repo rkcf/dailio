@@ -51,6 +51,14 @@ export default new Vuex.Store({
           commit('setActiveTask', response.data)
         })
     },
+    changeTaskName ({ commit }, { id, newName }) {
+      var fullURL = '/api/tasks/' + id + '/'
+      var payload = '{ "task_name": "' + newName + '" }'
+      Vue.http.patch(fullURL, payload)
+        .then((response) => {
+          commit('getTasks')
+        })
+    },
     openModal ({ commit }, module) {
       commit('setModalModule', module)
     }
