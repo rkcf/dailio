@@ -54,6 +54,7 @@ input {
   padding: .5Rem;
   border: 1px #ddd solid;
   width: 10rem;
+  margin-bottom: 1rem;
 }
 
 .btn {

@@ -2,10 +2,12 @@
 <div v-if="task">
   <div id="modal-header">
     <h2>
-      {{ task.task_name }} <button id="edit-btn" v-on:click="editName = true">edit</button>
+      {{ task.task_name }} 
+      <button id="edit-btn" v-show="!editTask" v-on:click="editTask = true">edit</button>
+      <button id="edit-btn" v-show="editTask" v-on:click="editTask = false">cancel</button>
     </h2>
   </div>
-  <div v-show="editName">
+  <div v-show="editTask">
     <form v-on:submit.prevent="validateTaskName(task.task_id, newName)">
         <input v-validate="'required|max:50'"
              placeholder="New Task Name?"
@@ -18,15 +20,16 @@
         </div>
       </transition>
     </form>
-    <button class="delete-btn" v-on:click="confirmDelete = true">
+  <div id="modal-body">
+    <button v-show="!confirmDelete" v-on:click="confirmDelete = true">
       delete
     </button>
-    <div v-show="confirmDelete">
+    <div class="input-danger" v-show="confirmDelete">
       <p>Are you sure you want to delete {{ task.task_name }}?</p>
+      <button class="btn" v-on:click="confirmDelete = false">Cancel</button>
       <button class="btn" v-on:click="deleteTask(task.task_id)">Delete</button>
     </div>
   </div>
-  <div id="modal-body">
   </div>
 </div>
 </template>
@@ -37,7 +40,7 @@ export default {
   data: function () {
     return {
       confirmDelete: false,
-      editName: false,
+      editTask: false,
       newName: ''
     }
   },
@@ -56,7 +59,6 @@ export default {
     changeTaskName: function (id, newName) {
       // Change the name of the active task
       this.$store.dispatch('changeTaskName', { id, newName })
-      this.editName = false
     },
     validateTaskName: function (id, newName) {
       // Check if new task name is valid before changing
