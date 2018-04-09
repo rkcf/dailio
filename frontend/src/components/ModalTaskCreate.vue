@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ModalContainer>
+    <ModalContainer v-on:close="close">
       <div id="modal-header">
         <h2>Create Task</h2>
       </div>
@@ -42,6 +42,10 @@ export default {
           this.$store.dispatch('addTask', taskname)
         }
       })
+    },
+    close: function () {
+      this.taskname = ''
+      this.$store.commit('closeModal')
     }
   }
 }

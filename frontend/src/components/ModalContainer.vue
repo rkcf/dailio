@@ -17,7 +17,7 @@ export default {
   name: 'ModalContainer',
   methods: {
     closeModal () {
-      this.$store.commit('closeModal')
+      this.$emit('close')
     }
   }
 }

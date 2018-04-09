@@ -1,6 +1,6 @@
 <template>
 <div v-if="task">
-  <ModalContainer>
+  <ModalContainer v-on:close="close">
     <div id="modal-header">
       <h2>
         {{ task.task_name }}
@@ -74,6 +74,12 @@ export default {
           this.changeTaskName(id, newName)
         }
       })
+    },
+    close: function () {
+      this.newName = ''
+      this.editTask = false
+      this.confirmDelete = false
+      this.$store.commit('closeModal')
     }
   }
 }
