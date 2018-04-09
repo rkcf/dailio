@@ -7,27 +7,14 @@
           <path d="M0 0h24v24H0z" fill="none"/>
         </svg>
       </button>
-      <transition name="fade">
-        <ModalTaskCreate v-show="$store.state.modalModule === 'create'"/>
-      </transition>
-      <transition name="fade">
-        <ModalTaskDetail v-bind:task="task" v-show="$store.state.modalModule === 'detail'"/>
-      </transition>
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
-import ModalTaskCreate from './ModalTaskCreate'
-import ModalTaskDetail from './ModalTaskDetail'
-
 export default {
   name: 'ModalContainer',
-  components: {
-    ModalTaskCreate,
-    ModalTaskDetail
-  },
-  props: ['task'],
   methods: {
     closeModal () {
       this.$store.commit('closeModal')

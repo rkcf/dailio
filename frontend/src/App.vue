@@ -1,24 +1,29 @@
 <template>
   <div id="app">
+    <transition name="fade">
+      <ModalTaskCreate v-show="$store.state.modalModule === 'create'"/>
+    </transition>
+    <transition name="fade">
+      <ModalTaskDetail v-show="$store.state.modalModule === 'detail'"/>
+    </transition>
     <div id="header">
       <h1 id="title">dailio</h1>
     </div>
     <CardContainer/>
-    <transition name="fade">
-      <ModalContainer v-show="$store.state.modalModule"/>
-    </transition>
   </div>
 </template>
 
 <script>
 import CardContainer from './components/CardContainer'
-import ModalContainer from './components/ModalContainer'
+import ModalTaskCreate from './components/ModalTaskCreate'
+import ModalTaskDetail from './components/ModalTaskDetail'
 
 export default {
   name: 'App',
   components: {
     CardContainer,
-    ModalContainer
+    ModalTaskCreate,
+    ModalTaskDetail
   },
   computed: {
     showModal () {

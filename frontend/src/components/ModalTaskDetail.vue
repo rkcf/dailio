@@ -1,42 +1,49 @@
 <template>
 <div v-if="task">
-  <div id="modal-header">
-    <h2>
-      {{ task.task_name }} 
-      <button id="edit-btn" v-show="!editTask" v-on:click="editTask = true">edit</button>
-      <button id="edit-btn" v-show="editTask" v-on:click="editTask = false">cancel</button>
-    </h2>
-  </div>
-  <div v-show="editTask">
-    <form v-on:submit.prevent="validateTaskName(task.task_id, newName)">
-        <input v-validate="'required|max:50'"
-             placeholder="New Task Name?"
-             v-model="newName"
-             name="newName"
-      ><button class="btn">Change</button>
-      <transition name="fade">
-        <div class="input-danger" v-show="errors.has('newName')">
-          {{ errors.first('newName') }}
-        </div>
-      </transition>
-    </form>
-  <div id="modal-body">
-    <button v-show="!confirmDelete" v-on:click="confirmDelete = true">
-      delete
-    </button>
-    <div class="input-danger" v-show="confirmDelete">
-      <p>Are you sure you want to delete {{ task.task_name }}?</p>
-      <button class="btn" v-on:click="confirmDelete = false">Cancel</button>
-      <button class="btn" v-on:click="deleteTask(task.task_id)">Delete</button>
+  <ModalContainer>
+    <div id="modal-header">
+      <h2>
+        {{ task.task_name }}
+        <button id="edit-btn" v-show="!editTask" v-on:click="editTask = true">edit</button>
+        <button id="edit-btn" v-show="editTask" v-on:click="editTask = false">cancel</button>
+      </h2>
     </div>
-  </div>
-  </div>
+    <div v-show="editTask">
+      <form v-on:submit.prevent="validateTaskName(task.task_id, newName)">
+          <input v-validate="'required|max:50'"
+               placeholder="New Task Name?"
+               v-model="newName"
+               name="newName"
+        ><button class="btn">Change</button>
+        <transition name="fade">
+          <div class="input-danger" v-show="errors.has('newName')">
+            {{ errors.first('newName') }}
+          </div>
+        </transition>
+      </form>
+    <div id="modal-body">
+      <button v-show="!confirmDelete" v-on:click="confirmDelete = true">
+        delete
+      </button>
+      <div class="input-danger" v-show="confirmDelete">
+        <p>Are you sure you want to delete {{ task.task_name }}?</p>
+        <button class="btn" v-on:click="confirmDelete = false">Cancel</button>
+        <button class="btn" v-on:click="deleteTask(task.task_id)">Delete</button>
+      </div>
+    </div>
+    </div>
+  </ModalContainer>
 </div>
 </template>
 
 <script>
+import ModalContainer from './ModalContainer'
+
 export default {
   name: 'ModalTaskDetail',
+  components: {
+    ModalContainer
+  },
   data: function () {
     return {
       confirmDelete: false,
