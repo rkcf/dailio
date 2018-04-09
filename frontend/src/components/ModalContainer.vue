@@ -7,8 +7,12 @@
           <path d="M0 0h24v24H0z" fill="none"/>
         </svg>
       </button>
-      <ModalTaskCreate v-show="$store.state.modalModule === 'create'"/>
-      <ModalTaskDetail v-bind:task="task" v-show="$store.state.modalModule === 'detail'"/>
+      <transition name="fade">
+        <ModalTaskCreate v-show="$store.state.modalModule === 'create'"/>
+      </transition>
+      <transition name="fade">
+        <ModalTaskDetail v-bind:task="task" v-show="$store.state.modalModule === 'detail'"/>
+      </transition>
     </div>
   </div>
 </template>
