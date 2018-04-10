@@ -59,6 +59,15 @@ export default new Vuex.Store({
           commit('getTasks')
         })
     },
+    toggleTaskCompletion ({ commit, getters }, id) {
+      var fullURL = '/api/tasks/' + id + '/'
+      var newCompletionState = !getters.getTaskById(id).task_completed
+      var payload = '{ "task_completed": "' + newCompletionState + '" }'
+      Vue.http.patch(fullURL, payload)
+        .then((response) => {
+          commit('getTasks')
+        })
+    },
     openModal ({ commit }, module) {
       // Open the modal with a specific modal module
       commit('setModalModule', module)
