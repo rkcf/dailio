@@ -5,15 +5,16 @@
         <h2>Create Task</h2>
       </div>
       <div id="modal-body">
-        <form v-on:submit.prevent="validateTaskname(taskname)">
-          <input v-validate="'required|max:50'"
-                 placeholder="Task Name"
-                 v-model="taskname"
-                 name="taskname"
+        <form v-on:submit.prevent="validateTaskName(taskName)">
+          <input
+            v-validate="'required|max:50'"
+            placeholder="New Task Name?"
+            v-model="taskName"
+            name="taskName"
           ><button class="btn">Create</button>
           <transition name="fade">
-            <div class="input-danger" v-show="errors.has('taskname')">
-              {{ errors.first('taskname') }}
+            <div class="input-danger" v-show="errors.has('taskName')">
+              {{ errors.first('taskName') }}
             </div>
           </transition>
         </form>
@@ -32,22 +33,25 @@ export default {
   },
   data () {
     return {
-      taskname: ''
+      taskName: ''
     }
   },
   methods: {
-    validateTaskname: function (taskname) {
+    validateTaskName: function (taskName) {
+      // Check if the task name is valid before creating
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.$store.dispatch('addTask', taskname)
+          this.$store.dispatch('addTask', taskName)
         }
       })
     },
     clearForm: function () {
-      this.taskname = ''
+      // Clear out the form and reset the validator
+      this.taskName = ''
       this.$validator.reset()
     },
     close: function () {
+      // Close out the modal
       this.clearForm()
       this.$store.commit('closeModal')
     }

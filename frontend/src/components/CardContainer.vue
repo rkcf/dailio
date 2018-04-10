@@ -1,6 +1,10 @@
 <template>
   <div id="card-container">
-    <TaskCard v-for="task in tasks" v-bind:task="task" v-bind:key="task.task_id"/>
+    <TaskCard
+      v-for="task in tasks"
+      v-bind:task="task"
+      v-bind:key="task.task_id"
+    />
     <div id="add-card">
       <button v-on:click="$store.dispatch('openModal', 'create')">
         <svg viewBox="0 0 24 24">
@@ -49,5 +53,4 @@ export default {
   display: block;
   margin: auto;
 }
-
 </style>

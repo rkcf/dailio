@@ -68,6 +68,8 @@ input {
   padding: .5rem;
   text-transform: uppercase;
   border: 1px #FC913a solid;
+  color: #fff;
+  font-weight: 500;
 }
 
 button:hover {
@@ -84,7 +86,6 @@ button:hover {
 
 .input-danger {
   color: #FF6B6B;
-  padding-top: 1rem;
 }
 
 </style>

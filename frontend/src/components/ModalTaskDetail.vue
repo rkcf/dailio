@@ -4,16 +4,27 @@
     <div id="modal-header">
       <h2>
         {{ task.task_name }}
-        <button id="edit-btn" v-show="!editTask" v-on:click="editTask = true">edit</button>
-        <button id="edit-btn" v-show="editTask" v-on:click="cancelEdit">cancel</button>
+        <button
+          id="edit-btn"
+          v-show="!editTask"
+          v-on:click="editTask = true">
+          edit
+        </button>
+        <button
+          id="edit-btn"
+          v-show="editTask"
+          v-on:click="cancelEdit">
+          cancel
+        </button>
       </h2>
     </div>
     <div v-show="editTask">
       <form v-on:submit.prevent="validateTaskName(task.task_id, newName)">
-          <input v-validate="'required|max:50'"
-               placeholder="New Task Name?"
-               v-model="newName"
-               name="newName"
+          <input
+            v-validate="'required|max:50'"
+            placeholder="New Task Name?"
+            v-model="newName"
+            name="newName"
         ><button class="btn">Change</button>
         <transition name="fade">
           <div class="input-danger" v-show="errors.has('newName')">
@@ -76,16 +87,19 @@ export default {
       })
     },
     cancelEdit: function () {
+      // Reset form and close editing view
       this.clearForm()
       this.editTask = false
     },
     clearForm: function () {
+      // Clear out the form paramaters and reset the validator
       this.newName = ''
       this.editTask = false
       this.confirmDelete = false
       this.$validator.reset()
     },
     close: function () {
+      // Close out the modal
       this.clearForm()
       this.$store.commit('closeModal')
     }
