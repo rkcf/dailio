@@ -5,7 +5,7 @@
       <h2>
         {{ task.task_name }}
         <button id="edit-btn" v-show="!editTask" v-on:click="editTask = true">edit</button>
-        <button id="edit-btn" v-show="editTask" v-on:click="editTask = false">cancel</button>
+        <button id="edit-btn" v-show="editTask" v-on:click="cancelEdit">cancel</button>
       </h2>
     </div>
     <div v-show="editTask">
@@ -75,10 +75,18 @@ export default {
         }
       })
     },
-    close: function () {
+    cancelEdit: function () {
+      this.clearForm()
+      this.editTask = false
+    },
+    clearForm: function () {
       this.newName = ''
       this.editTask = false
       this.confirmDelete = false
+      this.$validator.reset()
+    },
+    close: function () {
+      this.clearForm()
       this.$store.commit('closeModal')
     }
   }

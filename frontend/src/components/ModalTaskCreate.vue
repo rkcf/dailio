@@ -43,8 +43,12 @@ export default {
         }
       })
     },
-    close: function () {
+    clearForm: function () {
       this.taskname = ''
+      this.$validator.reset()
+    },
+    close: function () {
+      this.clearForm()
       this.$store.commit('closeModal')
     }
   }
