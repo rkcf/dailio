@@ -36,11 +36,11 @@ export default {
 <style scoped>
 #card-container {
   grid-column: 2 / 5;
-  padding-top: 1rem;
+  padding: 1rem 0 1rem 0;
   display: grid;
   grid-auto-flow: row;
   grid-gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 #add-card {
