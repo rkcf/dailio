@@ -1,5 +1,5 @@
 <template>
-  <diV id="modal-container" v-on:click="closeModal">
+  <div id="modal-container" v-on:click="closeModal">
     <div id="modal-content" v-on:click.stop>
       <button id="close-modal" v-on:click="closeModal">
         <svg viewBox="0 0 24 24">
@@ -33,24 +33,22 @@ export default {
 }
 
 #modal-content {
+  position: relative;
   background: #fff;
   width: 40%;
   padding: 1rem;
   margin: 10rem auto;
-  z-index: 110;
-}
-
-#modal-header {
-  margin-bottom: 1rem;
-}
-
-#modal-body {
 }
 
 #close-modal {
-  float: right;
-  fill: #000;
-  height: 1.5rem;
-  width: 1.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+#modal-header h2{
+  margin-top: 0;
 }
 </style>

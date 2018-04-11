@@ -45,7 +45,6 @@ export default {
 .task-card {
   position: relative;
   background: #eee;
-  padding: 1rem;
   text-align: center;
 }
 
@@ -53,8 +52,8 @@ export default {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  height: 1rem;
-  width: 1rem;
+  height: 2rem;
+  width: 2rem;
   background: none;
 }
 
@@ -75,5 +74,6 @@ export default {
   bottom: 1rem;
   background: #4ECDC4;
   border: none;
+  width: 5rem;
 }
 </style>

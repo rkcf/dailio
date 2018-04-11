@@ -108,5 +108,7 @@ export default {
 <style scoped>
 #edit-btn {
   color: #888;
+  font-size: 1.1rem;
+  font-weight: 400;
 }
 </style>

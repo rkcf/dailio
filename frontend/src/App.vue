@@ -34,12 +34,6 @@ export default {
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
 #header {
   background-color: #DCF4F3;
   grid-column: 1 / 6;
@@ -71,6 +65,11 @@ input {
   font-family: 'Raleway';
   font-weight: 600;
   letter-spacing: .15em;
+}
+
+button {
+  border: none;
+  background: none;
 }
 
 button:hover {
