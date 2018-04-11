@@ -41,7 +41,6 @@ export default {
   grid-auto-flow: row;
   grid-gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: minmax(200px, auto);
 }
 
 #add-card {
