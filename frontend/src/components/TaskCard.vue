@@ -65,12 +65,16 @@ export default {
   height: 100%;
 }
 
+.task-card h3 {
+  margin-top: 1rem;
+}
+
 .detail-btn {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  height: 2rem;
-  width: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
   background: none;
 }
 
@@ -78,8 +82,8 @@ export default {
   position: absolute;
   top: 1rem;
   left: 1rem;
-  height: 2rem;
-  width: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
 }
 
 .complete-btn {

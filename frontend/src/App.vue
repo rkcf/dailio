@@ -37,7 +37,7 @@ export default {
 #header {
   background-color: #DCF4F3;
   grid-column: 1 / 6;
-  padding: 1.5rem;
+  padding-left: 2.5rem;
 }
 
 #app {
@@ -45,6 +45,18 @@ export default {
   color: #0E2B29;
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
 }
 
 input {

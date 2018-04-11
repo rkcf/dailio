@@ -45,8 +45,8 @@ export default {
 
 #add-card {
   fill: #FC913A;
-  height: 4rem;
-  width: 4rem;
+  height: 6rem;
+  width: 6rem;
   margin: auto;
 }
 </style>
