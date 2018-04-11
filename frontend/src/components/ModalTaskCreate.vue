@@ -1,26 +1,24 @@
 <template>
-  <div>
-    <ModalContainer v-on:close="close">
-      <div id="modal-header">
-        <h2>Create Task</h2>
-      </div>
-      <div id="modal-body">
-        <form v-on:submit.prevent="validateTaskName(taskName)">
-          <input
-            v-validate="'required|max:50'"
-            placeholder="New Task Name?"
-            v-model="taskName"
-            name="taskName"
-          ><button class="btn">Create</button>
-          <transition name="fade">
-            <div class="input-danger" v-show="errors.has('taskName')">
-              {{ errors.first('taskName') }}
-            </div>
-          </transition>
-        </form>
-      </div>
-    </ModalContainer>
-  </div>
+  <ModalContainer v-on:close="close">
+    <div id="modal-header">
+      <h2>Create Task</h2>
+    </div>
+    <div id="modal-body">
+      <form v-on:submit.prevent="validateTaskName(taskName)">
+        <input
+          v-validate="'required|max:50'"
+          placeholder="New Task Name?"
+          v-model="taskName"
+          name="taskName"
+        ><button class="btn">Create</button>
+        <transition name="fade">
+          <div class="input-danger" v-show="errors.has('taskName')">
+            {{ errors.first('taskName') }}
+          </div>
+        </transition>
+      </form>
+    </div>
+  </ModalContainer>
 </template>
 
 <script>

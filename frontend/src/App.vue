@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <transition name="fade">
-      <ModalTaskCreate v-show="$store.state.modalModule === 'create'"/>
+      <ModalTaskCreate v-if="$store.state.modalModule === 'create'"/>
     </transition>
     <transition name="fade">
-      <ModalTaskDetail v-show="$store.state.modalModule === 'detail'"/>
+      <ModalTaskDetail v-if="$store.state.modalModule === 'detail'"/>
     </transition>
     <div id="header">
       <h1 id="title">dailio</h1>
@@ -30,7 +30,6 @@ export default {
       return this.$store.state.showModal
     }
   }
-
 }
 </script>
 
@@ -48,7 +47,7 @@ export default {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #0E2B29;
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
@@ -69,11 +68,17 @@ input {
   text-transform: uppercase;
   border: 1px #FC913a solid;
   color: #fff;
-  font-weight: 500;
+  font-family: 'Raleway';
+  font-weight: 600;
+  letter-spacing: .15em;
 }
 
 button:hover {
   cursor: pointer
+}
+
+.input-danger {
+  color: #FF6B6B;
 }
 
 .fade-leave-active, .fade-enter-active{
@@ -84,8 +89,13 @@ button:hover {
   opacity: 0;
 }
 
-.input-danger {
-  color: #FF6B6B;
+.popin-leave-active, .popin-enter-active {
+  transition: all .2s ease-in;
 }
 
+.popin-enter, .popin-leave-to {
+  opacity: 0;
+  transform: scale(2);
+  fill: green;
+}
 </style>

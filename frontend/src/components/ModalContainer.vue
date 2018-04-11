@@ -37,6 +37,7 @@ export default {
   width: 40%;
   padding: 1rem;
   margin: 10rem auto;
+  z-index: 110;
 }
 
 #modal-header {

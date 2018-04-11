@@ -1,5 +1,4 @@
 <template>
-<div v-if="task">
   <ModalContainer v-on:close="close">
     <div id="modal-header">
       <h2>
@@ -44,7 +43,6 @@
     </div>
     </div>
   </ModalContainer>
-</div>
 </template>
 
 <script>
