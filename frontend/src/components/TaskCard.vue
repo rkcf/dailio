@@ -19,6 +19,7 @@
             </svg>
           </div>
         </transition>
+        <p class="streak-count">{{ Math.floor(Math.random() * 20 )}}</p>
         <button class="btn raised complete-btn" v-on:click="toggleTaskCompletion(task.task_id)">done</button>
       </div>
     </div>
@@ -103,4 +104,15 @@ export default {
   background: #60DDD3;
   box-shadow: 3px 3px 4px #ccc;
 }
+
+.streak-count {
+  font-family: sans-serif;
+  font-size: 10rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  margin: 0;
+}
+
 </style>
