@@ -60,13 +60,20 @@ export default new Vuex.Store({
         })
     },
     toggleTaskCompletion ({ commit, getters }, id) {
-      var fullURL = '/api/tasks/' + id + '/'
-      var newCompletionState = !getters.getTaskById(id).task_completed
-      var payload = '{ "task_completed": "' + newCompletionState + '" }'
-      Vue.http.patch(fullURL, payload)
-        .then((response) => {
-          commit('getTasks')
-        })
+      // Will send a PUT/DELETE to the /done/ endpoint to change task completion state
+      var fullURL = '/api/tasks/' + id + '/done/'
+      var taskCompletionState = getters.getTaskById(id).task_completed
+      if (taskCompletionState) {
+        Vue.http.delete(fullURL)
+          .then((response) => {
+            commit('getTasks')
+          })
+      } else {
+        Vue.http.put(fullURL)
+          .then((response) => {
+            commit('getTasks')
+          })
+      }
     },
     openModal ({ commit }, module) {
       // Open the modal with a specific modal module
