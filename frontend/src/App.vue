@@ -71,11 +71,10 @@ input {
   margin: 0;
   background: #FC913a;
   padding: .5rem;
-  text-transform: uppercase;
   border: 1px #FC913a solid;
   color: #fff;
   font-family: 'Raleway';
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: .15em;
 }
 

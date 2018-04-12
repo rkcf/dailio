@@ -1,16 +1,16 @@
 <template>
   <ModalContainer v-on:close="close">
     <div id="modal-header">
-      <h2>Create Task</h2>
+      <h2>create task</h2>
     </div>
     <div id="modal-body">
       <form v-on:submit.prevent="validateTaskName(taskName)">
         <input
           v-validate="'required|max:50'"
-          placeholder="New Task Name?"
+          placeholder="new task name?"
           v-model="taskName"
           name="taskName"
-        ><button class="btn">Create</button>
+        ><button class="btn">create</button>
         <transition name="fade">
           <div class="input-danger" v-show="errors.has('taskName')">
             {{ errors.first('taskName') }}

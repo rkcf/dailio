@@ -21,10 +21,10 @@
       <form v-on:submit.prevent="validateTaskName(task.task_id, newName)">
           <input
             v-validate="'required|max:50'"
-            placeholder="New Task Name?"
+            placeholder="new task name?"
             v-model="newName"
             name="newName"
-        ><button class="btn">Change</button>
+        ><button class="btn">change</button>
         <transition name="fade">
           <div class="input-danger" v-show="errors.has('newName')">
             {{ errors.first('newName') }}
@@ -37,8 +37,8 @@
       </button>
       <div class="input-danger" v-show="confirmDelete">
         <p>Are you sure you want to delete {{ task.task_name }}?</p>
-        <button class="btn" v-on:click="confirmDelete = false">Cancel</button>
-        <button class="btn" v-on:click="deleteTask(task.task_id)">Delete</button>
+        <button class="btn" v-on:click="confirmDelete = false">cancel</button>
+        <button class="btn" v-on:click="deleteTask(task.task_id)">delete</button>
       </div>
     </div>
     </div>
