@@ -12,6 +12,6 @@ class TaskAll(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
 
 class TaskSingle(generics.RetrieveUpdateDestroyAPIView):
-    """view to get, delete, or update a single daily task"""
+    """view to get, or delete a single daily task"""
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
