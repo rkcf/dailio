@@ -38,6 +38,7 @@ export default {
   width: 40%;
   padding: 1rem;
   margin: 10rem auto;
+  box-shadow: 2px 3px 5px #555;
 }
 
 #close-modal {

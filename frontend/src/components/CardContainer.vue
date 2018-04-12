@@ -48,5 +48,14 @@ export default {
   height: 6rem;
   width: 6rem;
   margin: auto;
+  transition: all .5s ease;
+  filter: drop-shadow( 2px 2px 2px #ddd);
 }
+
+#add-card:hover {
+  fill: #FFA850;
+  transform: perspective(1px) scale(1.2);
+  filter: drop-shadow( 7px 5px 3px #ddd);
+}
+
 </style>

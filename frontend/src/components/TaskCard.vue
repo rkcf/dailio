@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="task-card">
+    <div class="task-card raised">
       <div class="card-content">
         <button class="detail-btn" v-on:click="showTaskDetail(task.task_id)">
           <svg viewBox="0 0 24 24">
@@ -19,7 +19,7 @@
             </svg>
           </div>
         </transition>
-        <button class="btn complete-btn" v-on:click="toggleTaskCompletion(task.task_id)">done</button>
+        <button class="btn raised complete-btn" v-on:click="toggleTaskCompletion(task.task_id)">done</button>
       </div>
     </div>
   </transition>
@@ -46,7 +46,7 @@ export default {
 <style scoped>
 .task-card {
   position: relative;
-  background: #eee;
+  background: #f5f5f5;
   text-align: center;
   box-sizing: border-box;
 }
@@ -96,5 +96,11 @@ export default {
   background: #4ECDC4;
   border: none;
   width: 5rem;
+  transition: all .4s ease;
+}
+
+.complete-btn:hover {
+  background: #60DDD3;
+  box-shadow: 3px 3px 4px #ccc;
 }
 </style>

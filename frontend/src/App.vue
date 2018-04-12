@@ -6,7 +6,7 @@
     <transition name="fade">
       <ModalTaskDetail v-if="$store.state.modalModule === 'detail'"/>
     </transition>
-    <div id="header">
+    <div id="header" class="raised">
       <h1 id="title">dailio</h1>
     </div>
     <CardContainer/>
@@ -90,6 +90,11 @@ button:hover {
 
 .input-danger {
   color: #FF6B6B;
+}
+
+.raised {
+  box-shadow: 1px 2px 3px #ccc;
+  transition: transform .3s ease;
 }
 
 .fade-leave-active, .fade-enter-active{
