@@ -74,9 +74,10 @@ export default {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 3rem;
+  width: 3rem;
   background: none;
+  fill: #4ECDC4;
 }
 
 .checkmark {
