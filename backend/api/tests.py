@@ -3,20 +3,26 @@ dailio api testing
 """
 
 from rest_framework.test import APITestCase, APIClient
-from api.models import Task
+from api.models import Task, CompletionDate
+from datetime import date
 
 class TaskTests(APITestCase):
     """Class to test task api"""
     def setUp(self):
-        """create seed task"""
-        Task.objects.create(task_name="test_name1", task_id=1)
+        """create seed tasks"""
+        Task.objects.create(task_name="test_name1", task_streak=5, task_maxstreak=5)
+
+        #Create a task with a completion date to test uncompleting
+        task_obj = Task.objects.create(task_name="test_name2", task_streak=5, task_maxstreak=5)
+        date_obj = CompletionDate.objects.create()
+        task_obj.completion_dates.add(date_obj)
+
 
     def test_create_task(self):
         """test the creation of a task by POST to /api/tasks/"""
         response = self.client.post('/api/tasks/', {'task_name': 'test_name2'}, format='json')
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(Task.objects.count(), 2)
-        self.assertEqual(Task.objects.get(pk=2).task_name, 'test_name2')
+        self.assertEqual(Task.objects.get(pk=3).task_name, 'test_name2')
 
     def test_get_task(self):
         """test the retrieval of a single task by GET to /api/tasks/task_id/"""
@@ -36,5 +42,20 @@ class TaskTests(APITestCase):
 
     def test_get_invalid_task(self):
         """test getting a non existant out of range task"""
-        response = self.client.get('/api/tasks/2/')
+        response = self.client.get('/api/tasks/100/')
         self.assertEqual(response.status_code, 404)
+
+    def test_complete_task(self):
+        """test completing a task"""
+        response = self.client.put('/api/tasks/1/done/')
+        self.assertEqual(Task.objects.get(pk=1).task_streak, 6)
+        self.assertEqual(Task.objects.get(pk=1).task_maxstreak, 6)
+        self.assertEqual(Task.objects.get(pk=1).task_completed, True)
+        self.assertTrue(CompletionDate.objects.all()[0] in Task.objects.get(pk=1).completion_dates.all())
+
+    def test_uncomplete_task(self):
+        """test uncompleting a task"""
+        response = self.client.delete('/api/tasks/2/done/')
+        self.assertEqual(Task.objects.get(pk=2).task_streak, 4)
+        self.assertEqual(Task.objects.get(pk=1).task_completed, False)
+        self.assertTrue(CompletionDate.objects.all()[0] not in Task.objects.get(pk=2).completion_dates.all())
