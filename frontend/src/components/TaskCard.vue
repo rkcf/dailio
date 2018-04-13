@@ -19,7 +19,7 @@
             </svg>
           </div>
         </transition>
-        <p class="streak-count">{{ Math.floor(Math.random() * 20 )}}</p>
+        <p class="streak-count">{{ task.task_streak }}</p>
         <button class="btn raised complete-btn" v-on:click="toggleTaskCompletion(task.task_id)">done</button>
       </div>
     </div>

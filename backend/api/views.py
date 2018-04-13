@@ -28,6 +28,7 @@ class TaskCompletion(generics.GenericAPIView):
         serializer = self.get_serializer(instance, data=request.data)
         serializer.is_valid()
         serializer.save(task_completed=True)
+        instance.increment_streak()
         return Response(serializer.data)
 
     def delete(self, request, *args, **kwargs):
@@ -36,4 +37,5 @@ class TaskCompletion(generics.GenericAPIView):
         serializer = self.get_serializer(instance, data=request.data)
         serializer.is_valid()
         serializer.save(task_completed=False)
+        instance.decrement_streak()
         return Response(serializer.data)
