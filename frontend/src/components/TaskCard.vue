@@ -1,28 +1,28 @@
 <template>
   <transition name="fade">
-    <div class="task-card raised">
-      <div class="card-content">
-        <button class="detail-btn" v-on:click="showTaskDetail(task.task_id)">
-          <svg viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none"/>
-            <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
-          </svg>
-        </button>
-        <h3>
-          {{ task.task_name }}
-        </h3>
-        <transition name="popin">
-          <div class="checkmark" v-show="task.task_completed">
+    <div v-bind:style="{ background: taskCardColor }" class="task-card raised">
+        <div class="card-content">
+          <button class="detail-btn" v-on:click="showTaskDetail(task.task_id)">
             <svg viewBox="0 0 24 24">
               <path d="M0 0h24v24H0z" fill="none"/>
-              <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+              <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
             </svg>
-          </div>
-        </transition>
-        <p class="streak-count">{{ task.task_streak }}</p>
-        <button class="btn raised complete-btn" v-on:click="toggleTaskCompletion(task.task_id)">done</button>
+          </button>
+          <h3>
+            {{ task.task_name }}
+          </h3>
+          <transition name="popin">
+            <div class="checkmark" v-show="task.task_completed">
+              <svg viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+              </svg>
+            </div>
+          </transition>
+          <p class="streak-count">{{ task.task_streak }}</p>
+          <button class="btn raised complete-btn" v-on:click="toggleTaskCompletion(task.task_id)">done</button>
+        </div>
       </div>
-    </div>
   </transition>
 </template>
 
@@ -30,6 +30,19 @@
 export default {
   name: 'TaskCard',
   props: ['task'],
+  computed: {
+    taskCardColor () {
+      if (this.task.task_streak === 0) {
+        return '#f5f5f5'
+      } else if (this.task.task_streak <= 3) {
+        return '#EFFBEF'
+      } else if (this.task.task_streak < 7) {
+        return '#D8F8D8'
+      } else if (this.task.task_streak >= 7) {
+        return '#A4EFA4'
+      }
+    }
+  },
   methods: {
     showTaskDetail: function (id) {
       // Open a modal to display the details of a task
@@ -47,7 +60,6 @@ export default {
 <style scoped>
 .task-card {
   position: relative;
-  background: #f5f5f5;
   text-align: center;
   box-sizing: border-box;
 }
