@@ -6,3 +6,6 @@ testapi:
 
 migrations:
 	cd backend && python manage.py makemigrations && python manage.py migrate
+
+backupdb:
+	sqlite3 backend/db/db.sqlite3 ".backup 'backend/db/backup_db.sqlite3'"
