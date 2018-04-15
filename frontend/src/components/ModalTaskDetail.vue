@@ -18,7 +18,7 @@
       </h2>
     </div>
     <div v-show="!editTask">
-      <h4>Current Streak: {{ task.task_maxstreak }}</h4>
+      <h4>Current Streak: {{ task.task_streak }}</h4>
       <h4>Max Streak: {{ task.task_maxstreak }}</h4>
       <h4>Last Completed: {{ lastCompleted }}</h4>
     </div>
