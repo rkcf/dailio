@@ -17,6 +17,11 @@
         </button>
       </h2>
     </div>
+    <div v-show="!editTask">
+      <h4>Current Streak: {{ task.task_maxstreak }}</h4>
+      <h4>Max Streak: {{ task.task_maxstreak }}</h4>
+      <h4>Last Completed: {{ lastCompleted }}</h4>
+    </div>
     <div v-show="editTask">
       <form v-on:submit.prevent="validateTaskName(task.task_id, newName)">
           <input
@@ -63,6 +68,13 @@ export default {
   computed: {
     task () {
       return this.$store.getters.getTaskById(this.$store.state.activeTaskId)
+    },
+    lastCompleted () {
+      if (this.task.completion_dates.length === 0) {
+        return 'Never'
+      } else {
+        return this.task.completion_dates[this.task.completion_dates.length - 1]
+      }
     }
   },
   methods: {
