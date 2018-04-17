@@ -8,9 +8,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
-DEBUG = True
+DEBUG = bool(os.environ['DJANGO_DEBUG'])
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Applications
 
@@ -56,14 +56,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dailio.wsgi.application'
 
-# Webpack Loader
-WEBPACK_LOADER = {
-        'DEFAULT': {
-            'BUNDLE_DIR_NAME': '',
-            'STATS_FILE': os.path.join(BASE_DIR, '../frontend/webpack-stats.json'),
-        }
-}
-
 # Database
 
 DATABASES = {
@@ -107,7 +99,25 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '../frontend/webpack-stats.json'),
-    os.path.join(BASE_DIR, '../dist'),
-)
+# Webpack Loader
+if DEBUG:
+    WEBPACK_LOADER = {
+            'DEFAULT': {
+                'STATS_FILE': os.path.join(BASE_DIR, '../frontend/webpack-stats.json'),
+            }
+    }
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, '../frontend/webpack-stats.json'),
+        os.path.join(BASE_DIR, '../dist'),
+    )
+else:
+    WEBPACK_LOADER = {
+            'DEFAULT': {
+                'BUNDLE_DIR_NAME': '',
+                'STATS_FILE': os.path.join(BASE_DIR, '../webpack-stats.json'),
+            }
+    }
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, '../webpack-static'),
+    )
+    STATIC_ROOT = '/var/www/static/'

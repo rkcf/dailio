@@ -3,6 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const BundleTracker = require('webpack-bundle-tracker')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -18,8 +19,6 @@ const createLintingRule = () => ({
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
 })
-
-let BundleTracker = require('webpack-bundle-tracker')
 
 module.exports = {
   context: path.resolve(__dirname, '../'),

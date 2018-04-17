@@ -1,0 +1,8 @@
+frontend
+Makefile
+README.md
+bin
+**/*.sqlite3
+**/tests.py
+**/__pycache__
+**/.venv
