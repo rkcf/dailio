@@ -1,6 +1,5 @@
 #general
 .*.swp
-dist/
 .env
 
 #backend stuff
@@ -10,7 +9,6 @@ __pycache__/
 migrations/
 
 #frontend stuff
-webpack-stats.json
 .DS_Store
 node_modules/
 npm-debug.log*
