@@ -14,7 +14,7 @@ services:
     build:
       context: ./conf/nginx
     ports:
-      - 80:8080
+      - 80:80
     volumes:
       - "dailio-static:/var/www/static"
     depends_on:
