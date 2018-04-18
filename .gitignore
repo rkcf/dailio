@@ -6,7 +6,6 @@
 .venv
 db.sqlite3
 __pycache__/
-migrations/
 
 #frontend stuff
 .DS_Store
