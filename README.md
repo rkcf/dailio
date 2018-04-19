@@ -2,25 +2,25 @@ dailio
 ======
 A self hosted daily task web app.
 
-##Use
+## Use
 The key to forming new habits is repetition and consistency.  Completing a task every day will help form positive behavioral patterns.  Eventually completion of this task will become automatic.
 
 1. Create a task.
 2. Complete the task.
 3. Every day the task completion resets, keep completing them to watch your streak counter go up.
 
-##Deployment
+## Deployment
 
 Edit conf/nginx/nginx.conf to change the server_name in the server block.
 
 Edit conf/production-env.env to change the DJANGO_SECRET_KEY
 
-###With Docker
+### With Docker
 `docker-compose up`
 Add bin/dailio-docker-cron-reset.sh to your daily crontab
 And you should be good to go.
 
-###Manual
+### Manual
 Copy backend code to /var/www/dailio
 Copy dist to /var/www/webpack-static
 Copy conf/django/uwsgi.ini to /var/www/
@@ -41,7 +41,7 @@ Copy conf/nginx/nginx.conf to /etc/nginx
 
 Start nginx
 
-##Contributing
+## Contributing
 Install Dependencies
 ```
 cd frontend
