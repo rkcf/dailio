@@ -34,6 +34,11 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: 'Raleway';
+  src: url('/static/fonts/Raleway-Regular.woff') format('woff');
+}
+
 #header {
   background-color: #DCF4F3;
   grid-column: 1 / 6;
@@ -73,7 +78,6 @@ input {
   padding: .5rem;
   border: 1px #FC913a solid;
   color: #fff;
-  font-family: 'Raleway';
   font-weight: 400;
   letter-spacing: .15em;
 }

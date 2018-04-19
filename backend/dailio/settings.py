@@ -103,12 +103,13 @@ STATIC_URL = '/static/'
 if DEBUG:
     WEBPACK_LOADER = {
             'DEFAULT': {
+                'BUNDLE_DIR_NAME': '',
                 'STATS_FILE': os.path.join(BASE_DIR, '../frontend/webpack-stats.json'),
             }
     }
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, '../frontend/webpack-stats.json'),
-        os.path.join(BASE_DIR, '../dist'),
+        os.path.join(BASE_DIR, './static'),
     )
 else:
     WEBPACK_LOADER = {
@@ -119,5 +120,6 @@ else:
     }
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, '../webpack-static'),
+        os.path.join(BASE_DIR, './static'),
     )
     STATIC_ROOT = '/var/www/static/'
