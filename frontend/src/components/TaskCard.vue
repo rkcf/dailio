@@ -79,7 +79,7 @@ export default {
 }
 
 .task-card h3 {
-  margin-top: 1rem;
+  margin: 1rem 4rem 0 4rem;
 }
 
 .detail-btn {
