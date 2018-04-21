@@ -6,10 +6,13 @@
     <transition name="fade">
       <ModalTaskDetail v-if="$store.state.modalModule === 'detail'"/>
     </transition>
+    <transition name="fade">
+      <ModalLogin v-if="$store.state.authToken === ''"/>
+    </transition>
     <div id="header" class="raised">
       <h1 id="title">dailio</h1>
     </div>
-    <CardContainer/>
+    <CardContainer v-if="$store.state.authToken !== ''"/>
   </div>
 </template>
 
@@ -17,13 +20,21 @@
 import CardContainer from './components/CardContainer'
 import ModalTaskCreate from './components/ModalTaskCreate'
 import ModalTaskDetail from './components/ModalTaskDetail'
+import ModalLogin from './components/ModalLogin'
 
 export default {
   name: 'App',
   components: {
     CardContainer,
     ModalTaskCreate,
-    ModalTaskDetail
+    ModalTaskDetail,
+    ModalLogin
+  },
+  created () {
+    const token = sessionStorage.getItem('token')
+    if (token) {
+      this.$store.commit('setAuthToken', token)
+    }
   },
   computed: {
     showModal () {

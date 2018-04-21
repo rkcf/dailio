@@ -6,21 +6,29 @@ from api.serializers import TaskSerializer, CompletionSerializer
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 class TaskAll(generics.ListCreateAPIView):
     """view to retrieve all or create a daily task"""
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
 
 class TaskSingle(generics.RetrieveUpdateDestroyAPIView):
     """view to get, or delete a single daily task"""
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
 
 class TaskCompletion(generics.GenericAPIView):
     """view for setting the task completion through the /tasks/id/done/ endpoint"""
     queryset = Task.objects.all()
     serializer_class = CompletionSerializer
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
 
     def put(self, request, *args, **kwargs):
         """Set task_completed to true"""
