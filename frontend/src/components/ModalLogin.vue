@@ -19,17 +19,22 @@
           type="password"
         ><br />
         <button class="btn">login</button>
-        <transition name="fade">
-          <div class="input-danger" v-show="errors.has('username')">
-            {{ errors.first('username') }}
-          </div>
-        </transition>
-        <transition name="fade">
-          <div class="input-danger" v-show="errors.has('password')">
-            {{ errors.first('password') }}
-          </div>
-        </transition>
       </form>
+      <transition name="fade">
+        <div class="input-danger" v-show="$store.state.loginError">
+          {{ $store.state.loginError }}
+        </div>
+      </transition>
+      <transition name="fade">
+        <div class="input-danger" v-show="errors.has('username')">
+          {{ errors.first('username') }}
+        </div>
+      </transition>
+      <transition name="fade">
+        <div class="input-danger" v-show="errors.has('password')">
+          {{ errors.first('password') }}
+        </div>
+      </transition>
     </div>
   </ModalContainer>
 </template>

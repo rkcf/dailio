@@ -10,7 +10,8 @@ export default new Vuex.Store({
     modalModule: '',
     tasks: [],
     activeTaskId: '',
-    authToken: ''
+    authToken: '',
+    loginError: ''
   },
   mutations: {
     closeModal (state) {
@@ -33,6 +34,10 @@ export default new Vuex.Store({
     setTasks (state, tasks) {
       // Set the daily taskS
       state.tasks = tasks
+    },
+    setLoginError (state, error) {
+      // Sets the message for login fails
+      state.loginError = error
     }
   },
   actions: {
@@ -93,6 +98,9 @@ export default new Vuex.Store({
       Vue.http.post('/account/login/', {'username': username, 'password': password})
         .then((response) => {
           commit('setAuthToken', response.data.key)
+          commit('setLoginError', '')
+        }, response => {
+          commit('setLoginError', response.data.non_field_errors[0])
         })
     },
     logout ({ commit, getters }) {

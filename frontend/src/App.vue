@@ -116,6 +116,7 @@ input {
   color: #fff;
   font-weight: 400;
   letter-spacing: .15em;
+  margin-bottom: 1rem;
 }
 
 button {
@@ -136,6 +137,8 @@ button:hover {
 
 .input-danger {
   color: #FF6B6B;
+  font-weight: bold;
+  padding-bottom: .5rem;
 }
 
 .raised {
