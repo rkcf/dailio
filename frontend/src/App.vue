@@ -10,7 +10,6 @@
       <ModalLogin v-if="$store.state.authToken === ''"/>
     </transition>
     <div id="header" class="raised">
-      <MainMenu v-show="showMenu"/>
       <button id="menu-btn" v-on:click="toggleMenu">
         <svg viewBox="0 0 24 24">
           <path d="M0 0h24v24H0z" fill="none"/>
@@ -19,6 +18,9 @@
       </button>
       <h1 id="title">dailio</h1>
     </div>
+    <transition name="slidein">
+      <MainMenu v-show="showMenu" v-on:closeMenu="toggleMenu"/>
+    </transition>
     <CardContainer v-if="$store.state.authToken !== ''"/>
   </div>
 </template>
@@ -74,7 +76,7 @@ export default {
 }
 
 #header {
-  background-color: #DCF4F3;
+  background-color: #dcf4f3;
   grid-column: 1 / 6;
   padding-left: 2.5rem;
 }
@@ -158,4 +160,13 @@ button:hover {
   transform: scale(2);
   fill: green;
 }
+
+.slidein-enter, .slidein-leave-to {
+  transform: translateX(20rem);
+}
+
+.slidein-leave-active, .slidein-enter-active {
+  transition: all .3s ease;
+}
+
 </style>

@@ -11,6 +11,7 @@ export default {
   name: 'MainMenu',
   methods: {
     logout () {
+      this.$emit('closeMenu')
       this.$store.dispatch('logout')
     }
   }
@@ -19,10 +20,12 @@ export default {
 
 <style scoped>
 #main-menu {
-  position: absolute;
-  right: 2.5rem;
-  top: 5rem;
-  background: #f5f5f5;
+  grid-column: 5;
+  grid-row: 2;
+  background: #dcf4f3;
   padding: 1.5rem;
+  position: relative;
+  text-align: center;
+  margin-left: 1.5rem;
 }
 </style>
