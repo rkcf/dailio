@@ -10,6 +10,13 @@
       <ModalLogin v-if="$store.state.authToken === ''"/>
     </transition>
     <div id="header" class="raised">
+      <MainMenu v-show="showMenu"/>
+      <button id="menu-btn" v-on:click="toggleMenu">
+        <svg viewBox="0 0 24 24">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+        </svg>
+      </button>
       <h1 id="title">dailio</h1>
     </div>
     <CardContainer v-if="$store.state.authToken !== ''"/>
@@ -21,6 +28,7 @@ import CardContainer from './components/CardContainer'
 import ModalTaskCreate from './components/ModalTaskCreate'
 import ModalTaskDetail from './components/ModalTaskDetail'
 import ModalLogin from './components/ModalLogin'
+import MainMenu from './components/MainMenu'
 
 export default {
   name: 'App',
@@ -28,12 +36,27 @@ export default {
     CardContainer,
     ModalTaskCreate,
     ModalTaskDetail,
-    ModalLogin
+    ModalLogin,
+    MainMenu
   },
   created () {
     const token = sessionStorage.getItem('token')
     if (token) {
       this.$store.commit('setAuthToken', token)
+    }
+  },
+  data: function () {
+    return {
+      showMenu: false
+    }
+  },
+  methods: {
+    toggleMenu () {
+      if (this.showMenu) {
+        this.showMenu = false
+      } else {
+        this.showMenu = true
+      }
     }
   },
   computed: {
@@ -100,6 +123,13 @@ button {
 
 button:hover {
   cursor: pointer
+}
+
+#menu-btn {
+  float: right;
+  margin: 2rem 2.5rem 0 0;
+  height: 3rem;
+  width: 3rem;
 }
 
 .input-danger {

@@ -28,7 +28,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$store.commit('getTasks')
+    this.$store.dispatch('getTasks')
   }
 }
 </script>

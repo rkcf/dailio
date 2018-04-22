@@ -21,61 +21,66 @@ export default new Vuex.Store({
       // Set the active modal module
       state.modalModule = module
     },
-    getTasks (state) {
-      // Get a list of all tasks from the api
-      Vue.http.get('/api/tasks/', {headers: {'Authorization': state.authToken}})
-        .then((response) => {
-          state.tasks = response.data
-        })
-    },
     setActiveTaskId (state, id) {
       // Set the active task id for use with modal modules
       state.activeTaskId = id
     },
     setAuthToken (state, token) {
-      state.authToken = 'Token ' + token
+      // Set the auth token in the vuex state and browser session storage
+      state.authToken = token
       sessionStorage.setItem('token', token)
+    },
+    setTasks (state, tasks) {
+      // Set the daily taskS
+      state.tasks = tasks
     }
   },
   actions: {
-    addTask ({ commit, state }, taskname) {
+    getTasks ({ commit, getters }) {
+      // Get a list of all tasks from the api
+      Vue.http.get('/api/tasks/', {headers: getters.getAuthHeader})
+        .then((response) => {
+          commit('setTasks', response.data)
+        })
+    },
+    addTask ({ commit, dispatch, getters }, taskname) {
       // Create a new task
-      Vue.http.post('/api/tasks/', {task_name: taskname}, {headers: {'Authorization': state.authToken}})
+      Vue.http.post('/api/tasks/', {task_name: taskname}, {headers: getters.getAuthHeader})
         .then((response) => {
           commit('closeModal')
-          commit('getTasks')
+          dispatch('getTasks')
         })
     },
-    deleteTask ({ commit, state }, id) {
+    deleteTask ({ dispatch, getters }, id) {
       // Delete a task given its id
       var fullURL = '/api/tasks/' + id + '/'
-      Vue.http.delete(fullURL, {headers: {'Authorization': state.authToken}})
+      Vue.http.delete(fullURL, {headers: getters.getAuthHeader})
         .then((response) => {
-          commit('getTasks')
+          dispatch('getTasks')
         })
     },
-    changeTaskName ({ commit, state }, { id, newName }) {
+    changeTaskName ({ dispatch, getters }, { id, newName }) {
       // Change a task name with a PATCH
       var fullURL = '/api/tasks/' + id + '/'
       var payload = '{ "task_name": "' + newName + '" }'
-      Vue.http.patch(fullURL, payload, {headers: {'Authorization': state.authToken}})
+      Vue.http.patch(fullURL, payload, {headers: getters.getAuthHeader})
         .then((response) => {
-          commit('getTasks')
+          dispatch('getTasks')
         })
     },
-    toggleTaskCompletion ({ commit, getters, state }, id) {
+    toggleTaskCompletion ({ dispatch, getters }, id) {
       // Will send a PUT/DELETE to the /done/ endpoint to change task completion state
       var fullURL = '/api/tasks/' + id + '/done/'
       var taskCompletionState = getters.getTaskById(id).task_completed
       if (taskCompletionState) {
-        Vue.http.delete(fullURL, {headers: {'Authorization': state.authToken}})
+        Vue.http.delete(fullURL, {headers: getters.getAuthHeader})
           .then((response) => {
-            commit('getTasks')
+            dispatch('getTasks')
           })
       } else {
-        Vue.http.put(fullURL, {}, {headers: {'Authorization': state.authToken}})
+        Vue.http.put(fullURL, {}, {headers: getters.getAuthHeader})
           .then((response) => {
-            commit('getTasks')
+            dispatch('getTasks')
           })
       }
     },
@@ -84,9 +89,17 @@ export default new Vuex.Store({
       commit('setModalModule', module)
     },
     login ({ commit }, {username, password}) {
+      // Login user over API, returns auth token
       Vue.http.post('/account/login/', {'username': username, 'password': password})
         .then((response) => {
           commit('setAuthToken', response.data.key)
+        })
+    },
+    logout ({ commit, getters }) {
+      // Logout user over API
+      Vue.http.post('/account/logout/', {}, {headers: getters.getAuthHeader})
+        .then((response) => {
+          commit('setAuthToken', '')
         })
     }
   },
@@ -94,6 +107,9 @@ export default new Vuex.Store({
     getTaskById: (state) => (id) => {
       // Return a single task from the array by id
       return state.tasks.find(task => task.task_id === id)
+    },
+    getAuthHeader: (state) => {
+      return {'Authorization': 'Token ' + state.authToken}
     }
   }
 })
