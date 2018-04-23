@@ -9,8 +9,8 @@ The key to forming new habits is repetition and consistency.  Completing a task 
 2. Complete the task.
 3. Every day the task completion resets, keep completing them to watch your streak counter go up.
 
-##Compatibility
-Currently tested working with Firefox 59+ and Chromium 65+.  No testing has been done with any other browsers (i.e. IE). 
+## Compatibility
+Currently tested working with Firefox 59+ and Chromium 65+.  No testing has been done with any other browsers (i.e. IE).
 Currently the formatting only supports desktop use.  Tablet/Mobile compatibility coming soon.
 
 ## Deployment
@@ -19,11 +19,19 @@ Edit conf/nginx/nginx.conf to change the server_name in the server block.
 
 Edit conf/production-env.env to change the DJANGO_SECRET_KEY
 
-Create your user with `python manage.py createsuperuser`
-
 ### With Docker
 `docker-compose up`
+
 Add bin/dailio-docker-cron-reset.sh to your daily crontab
+
+Attach to the container to create your user
+
+```
+docker exec -it dailio_django-wsgi_1 /bin/ash
+cd dailio
+python3 manage.py createsuperuser
+```
+
 And you should be good to go.
 
 ### Manual
@@ -40,6 +48,7 @@ Collect static resources and create the database:
 python manage.py collectstatic
 python manage.py migrate
 ```
+Create your user with `python manage.py createsuperuser`
 
 Start app server with `uwsgi --ini /var/www/uwsgi.ini`
 
