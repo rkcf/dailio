@@ -35,7 +35,7 @@ export default {
 #modal-content {
   position: relative;
   background: #fff;
-  width: 40%;
+  width: 30%;
   padding: 1rem;
   margin: 10rem auto;
   box-shadow: 2px 3px 5px #555;
@@ -51,5 +51,6 @@ export default {
 
 #modal-header h2{
   margin-top: 0;
+  margin-right: 10%;
 }
 </style>
