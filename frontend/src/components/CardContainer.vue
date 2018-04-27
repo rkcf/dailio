@@ -5,7 +5,7 @@
       v-bind:task="task"
       v-bind:key="task.task_id"
     />
-    <button id="add-card" v-on:click="$store.dispatch('openModal', 'create')">
+    <button id="task-create-btn" v-on:click="openTaskCreate">
       <svg viewBox="0 0 24 24">
         <path d="M0 0h24v24H0z" fill="none"/>
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
@@ -28,7 +28,14 @@ export default {
     }
   },
   mounted: function () {
+    // get tasks from api upon component mounting
     this.$store.dispatch('getTasks')
+  },
+  methods: {
+    openTaskCreate () {
+      // open modal popup for task creation
+      this.$store.dispatch('openModal', 'create')
+    }
   }
 }
 </script>
@@ -43,7 +50,7 @@ export default {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-#add-card {
+#task-create-btn {
   fill: #FC913A;
   height: 6rem;
   width: 6rem;
@@ -52,7 +59,7 @@ export default {
   filter: drop-shadow( 2px 2px 2px #ddd);
 }
 
-#add-card:hover {
+#task-create-btn:hover {
   fill: #FFA850;
   transform: perspective(1px) scale(1.2);
   filter: drop-shadow( 7px 5px 3px #ddd);
