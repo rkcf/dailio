@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <transition name="fade">
-      <ModalTaskCreate v-if="$store.state.modalModule === 'create'"/>
+      <ModalTaskCreate v-show="showModal === 'create'"/>
     </transition>
     <transition name="fade">
-      <ModalTaskDetail v-if="$store.state.modalModule === 'detail'"/>
+      <ModalTaskDetail v-if="showModal === 'detail'"/>
     </transition>
     <transition name="fade">
-      <ModalLogin v-if="$store.state.authToken === ''"/>
+      <ModalLogin v-if="!loggedIn"/>
     </transition>
     <div id="header" class="raised">
       <button id="menu-btn" v-on:click="toggleMenu">
@@ -21,11 +21,12 @@
     <transition name="slidein">
       <MainMenu v-show="showMenu" v-on:closeMenu="toggleMenu"/>
     </transition>
-    <CardContainer v-if="$store.state.authToken !== ''"/>
+    <CardContainer v-if="loggedIn"/>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CardContainer from './components/CardContainer'
 import ModalTaskCreate from './components/ModalTaskCreate'
 import ModalTaskDetail from './components/ModalTaskDetail'
@@ -42,6 +43,7 @@ export default {
     MainMenu
   },
   created () {
+    // check if user already has a login token
     const token = sessionStorage.getItem('token')
     if (token) {
       this.$store.commit('setAuthToken', token)
@@ -62,9 +64,10 @@ export default {
     }
   },
   computed: {
-    showModal () {
-      return this.$store.state.showModal
-    }
+    ...mapGetters([
+      'loggedIn',
+      'showModal'
+    ])
   }
 }
 </script>

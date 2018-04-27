@@ -67,9 +67,11 @@ export default {
   },
   computed: {
     task () {
-      return this.$store.getters.getTaskById(this.$store.state.activeTaskId)
+      // get the task for detail view using the activeTaskId state
+      return this.$store.getters.getTaskById(this.$store.getters.getActiveTask)
     },
     lastCompleted () {
+      // return last date the task was completed on
       if (this.task.completion_dates.length === 0) {
         return 'Never'
       } else {
