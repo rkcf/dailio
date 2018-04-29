@@ -51,7 +51,8 @@ const actions = {
 
 const getters = {
   authToken: state => state.authToken,
-  loggedIn: state => state.loggedIn
+  loggedIn: state => state.loggedIn,
+  loginError: state => state.loginError
 }
 
 export default {

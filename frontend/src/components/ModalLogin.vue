@@ -21,18 +21,18 @@
         <button class="btn">login</button>
       </form>
       <transition name="fade">
-        <div class="input-danger" v-show="$store.state.loginError">
-          {{ $store.state.loginError }}
+        <div class="input-danger" v-show="loginError">
+          <p>{{ loginError }}</p>
         </div>
       </transition>
       <transition name="fade">
         <div class="input-danger" v-show="errors.has('username')">
-          {{ errors.first('username') }}
+          <p>{{ errors.first('username') }}</p>
         </div>
       </transition>
       <transition name="fade">
         <div class="input-danger" v-show="errors.has('password')">
-          {{ errors.first('password') }}
+          <p>{{ errors.first('password') }}</p>
         </div>
       </transition>
     </div>
@@ -51,6 +51,11 @@ export default {
     return {
       username: '',
       password: ''
+    }
+  },
+  computed: {
+    loginError () {
+      return this.$store.getters.loginError
     }
   },
   methods: {
