@@ -27,7 +27,7 @@ const actions = {
 
 const getters = {
   showModal: state => state.modalModule,
-  getActiveTask: state => state.activeTaskId
+  getActiveTaskId: state => state.activeTaskId
 }
 
 export default {

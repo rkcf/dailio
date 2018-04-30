@@ -5,24 +5,26 @@
         {{ task.task_name }}
         <button
           id="edit-btn"
+          text="edit"
           v-show="!editTask"
-          v-on:click="editTask = true">
+          v-on:click="showEdit">
           edit
         </button>
         <button
           id="edit-btn"
+          text="cancel"
           v-show="editTask"
           v-on:click="cancelEdit">
           cancel
         </button>
       </h2>
     </div>
-    <div v-show="!editTask">
+    <div id="task-detail" v-show="!editTask">
       <h4>Current Streak: {{ task.task_streak }}</h4>
       <h4>Max Streak: {{ task.task_maxstreak }}</h4>
       <h4>Last Completed: {{ lastCompleted }}</h4>
     </div>
-    <div v-show="editTask">
+    <div id="edit-task" v-show="editTask">
       <form v-on:submit.prevent="validateTaskName(task.task_id, newName)">
           <input
             v-validate="'required|max:50'"
@@ -43,7 +45,7 @@
       <div class="input-danger" v-show="confirmDelete">
         <p>Are you sure you want to delete {{ task.task_name }}?</p>
         <button class="btn" v-on:click="confirmDelete = false">cancel</button>
-        <button class="btn" v-on:click="deleteTask(task.task_id)">delete</button>
+        <button id="delete-btn" class="btn" v-on:click="deleteTask(task.task_id)">delete</button>
       </div>
     </div>
     </div>
@@ -68,7 +70,7 @@ export default {
   computed: {
     task () {
       // get the task for detail view using the activeTaskId state
-      return this.$store.getters.getTaskById(this.$store.getters.getActiveTask)
+      return this.$store.getters.getTaskById(this.$store.getters.getActiveTaskId)
     },
     lastCompleted () {
       // return last date the task was completed on
@@ -82,9 +84,9 @@ export default {
   methods: {
     deleteTask: function (id) {
       // delete the active task
+      this.confirmDelete = false
       this.$store.commit('closeModal')
       this.$store.dispatch('deleteTask', id)
-      this.confirmDelete = false
     },
     changeTaskName: function (id, newName) {
       // Change the name of the active task
@@ -97,6 +99,10 @@ export default {
           this.changeTaskName(id, newName)
         }
       })
+    },
+    showEdit: function () {
+      // Open editing view
+      this.editTask = true
     },
     cancelEdit: function () {
       // Reset form and close editing view
