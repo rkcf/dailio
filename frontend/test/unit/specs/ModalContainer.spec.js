@@ -6,7 +6,7 @@ const localVue = createLocalVue()
 describe('ModalContainer.vue', () => {
   let wrapper
 
-  beforeEach( () => {
+  beforeEach(() => {
     wrapper = shallow(ModalContainer, { localVue })
   })
 
@@ -23,4 +23,3 @@ describe('ModalContainer.vue', () => {
     })
   })
 })
-

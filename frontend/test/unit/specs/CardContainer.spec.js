@@ -12,7 +12,7 @@ describe('CardContainer.vue', () => {
   let actions
   let getters
 
-  beforeEach( () => {
+  beforeEach(() => {
     actions = {
       getTasks: jest.fn(),
       openModal: jest.fn()
@@ -55,4 +55,3 @@ describe('CardContainer.vue', () => {
     })
   })
 })
-

@@ -11,9 +11,9 @@ describe('MainMenu.vue', () => {
   let store
   let actions
 
-  beforeEach( () => {
+  beforeEach(() => {
     actions = {
-      logout: jest.fn(),
+      logout: jest.fn()
     }
 
     store = new Vuex.Store({ actions })
@@ -37,4 +37,3 @@ describe('MainMenu.vue', () => {
     })
   })
 })
-

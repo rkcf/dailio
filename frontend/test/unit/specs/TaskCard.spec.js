@@ -12,7 +12,7 @@ describe('TaskCard.vue', () => {
   let actions
   let mutations
 
-  beforeEach( () => {
+  beforeEach(() => {
     actions = {
       toggleTaskCompletion: jest.fn(),
       openModal: jest.fn()
@@ -68,4 +68,3 @@ describe('TaskCard.vue', () => {
     })
   })
 })
-
