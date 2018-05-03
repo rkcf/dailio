@@ -47,7 +47,6 @@ export default {
   display: grid;
   grid-auto-flow: row;
   grid-gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 #task-create-btn {
@@ -63,6 +62,30 @@ export default {
   fill: #FFA850;
   transform: perspective(1px) scale(1.2);
   filter: drop-shadow( 7px 5px 3px #ddd);
+}
+
+@media screen and(max-width:659px) {
+  #card-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width:660px) {
+  #card-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width:1024px) {
+  #card-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width:1400px) {
+  #card-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 </style>
