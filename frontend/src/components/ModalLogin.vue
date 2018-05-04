@@ -1,9 +1,7 @@
 <template>
   <ModalContainer v-on:close="close">
-    <div id="modal-header">
-      <h2>login</h2>
-    </div>
     <div id="modal-body">
+      <h2>login</h2>
       <form v-on:submit.prevent="validateLogin(username, password)">
         <input
           v-validate="'required'"
@@ -86,7 +84,8 @@ export default {
 #modal-body  {
   text-align: center;
 }
-#modal-header {
-  text-align: center;
+
+#modal-body h2 {
+  margin-top: 0;
 }
 </style>
