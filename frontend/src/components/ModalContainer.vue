@@ -35,7 +35,6 @@ export default {
 #modal-content {
   position: relative;
   background: #fff;
-  width: 30%;
   padding: 1rem;
   margin: 10rem auto;
   box-shadow: 2px 3px 5px #555;
@@ -53,4 +52,23 @@ export default {
   margin-top: 0;
   margin-right: 10%;
 }
+
+@media screen and (max-width:767px) {
+  #modal-content {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width:768px) {
+  #modal-content {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width:1200px) {
+  #modal-content {
+    width: 40%;
+  }
+}
+
 </style>
