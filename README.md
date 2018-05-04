@@ -10,8 +10,7 @@ The key to forming new habits is repetition and consistency.  Completing a task 
 3. Every day the task completion resets, keep completing them to watch your streak counter go up.
 
 ## Compatibility
-Currently tested working with Firefox 59+ and Chromium 65+.  No testing has been done with any other browsers (i.e. IE).
-Currently the formatting only supports desktop use.  Tablet/Mobile compatibility coming soon.
+Currently tested working with Firefox 59+ and Chromium 65+.  No testing has been done with any other browsers.
 
 ## Deployment
 
