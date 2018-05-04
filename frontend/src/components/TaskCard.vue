@@ -8,7 +8,9 @@
               <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
             </svg>
           </button>
-          <h3>{{ task.task_name }}</h3>
+          <div class="task-name">
+            <h3>{{ task.task_name }}</h3>
+          </div>
           <transition name="popin">
             <div class="checkmark" v-show="task.task_completed">
               <svg viewBox="0 0 24 24">
@@ -56,10 +58,9 @@ export default {
 </script>
 
 <style scoped>
+
 .task-card {
   position: relative;
-  text-align: center;
-  box-sizing: border-box;
 }
 
 .task-card:before {
@@ -68,46 +69,59 @@ export default {
   content: '';
 }
 
-.task-card .card-content {
-  position: absolute;
+.task-card .card-content{
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
 
-.task-card h3 {
-  margin: 1rem 4rem 0 4rem;
+.card-content {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.task-name {
+  grid-row: 1;
+  grid-column: 2 / 5;
+  place-self: center;
+  width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.task-name h3 {
+  text-align: center;
+  margin: 1rem 0 0 0;
+  overflow: hidden;
 }
 
 .detail-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  height: 3rem;
-  width: 3rem;
+  grid-row: 1;
+  grid-column: 5;
+  place-self: center;
   background: none;
   fill: #4ECDC4;
+  width: 3rem;
+  height: 3rem;
 }
 
 .checkmark {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  height: 2.5rem;
+  grid-row: 1;
+  grid-column: 1;
+  place-self: center;
   width: 2.5rem;
+  height: 2.5rem;
 }
 
 .complete-btn {
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  bottom: 1rem;
+  grid-row: 5;
+  grid-column: 2 / 5;
+  place-self: center;
   background: #4ECDC4;
   border: none;
-  width: 5rem;
   transition: all .4s ease;
 }
 
@@ -117,13 +131,11 @@ export default {
 }
 
 .streak-count {
+  grid-row: 2 / 5;
+  grid-column: 2 / 5;
+  place-self: center;
   font-family: sans-serif;
-  font-size: 10rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  margin: 0;
+  font-size: 6rem;
 }
 
 </style>
