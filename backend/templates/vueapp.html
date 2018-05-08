@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 {% load render_bundle from webpack_loader %}
+<noscript>
+  <h2>Please enable javascript to use dailio</h2>
+</noscript>
 <div id="app"></div>
 {% render_bundle 'app' %}
 {% endblock %}
