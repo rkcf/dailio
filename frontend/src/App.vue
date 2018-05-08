@@ -81,6 +81,7 @@ export default {
 #header {
   background-color: #dcf4f3;
   grid-column: 1 / 6;
+  z-index: 20;
   padding-left: 2.5rem;
 }
 
@@ -168,7 +169,8 @@ button:hover {
 }
 
 .slidein-enter, .slidein-leave-to {
-  transform: translateX(20rem);
+  transform: translateY(-20rem);
+  opacity: 0;
 }
 
 .slidein-leave-active, .slidein-enter-active {

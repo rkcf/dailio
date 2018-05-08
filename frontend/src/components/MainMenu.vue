@@ -1,5 +1,5 @@
 <template>
-  <div id="main-menu">
+  <div id="main-menu" class="raised">
     <button id="logout-btn" v-on:click="logout">
       logout
     </button>
@@ -20,12 +20,12 @@ export default {
 
 <style scoped>
 #main-menu {
-  grid-column: 5;
+  grid-column: 1 / 6;
   grid-row: 2;
-  background: #dcf4f3;
+  z-index: 10;
+  background: #c9f6f4;
   padding: 1.5rem;
   position: relative;
   text-align: center;
-  margin-left: 1.5rem;
 }
 </style>
