@@ -2,6 +2,10 @@ dailio
 ======
 A self hosted daily task web app.
 
+Demo site available at dailio-demo.rkcf.me
+username: demouser
+password: demopassword
+
 ## Use
 The key to forming new habits is repetition and consistency.  Completing a task every day will help form positive behavioral patterns.  Eventually completion of this task will become automatic.
 
