@@ -2,8 +2,10 @@ dailio
 ======
 A self hosted daily task web app.
 
-Demo site available at dailio-demo.rkcf.me
+Demo site available at http://dailio-demo.rkcf.me
+
 username: demouser
+
 password: demopassword
 
 ## Use
