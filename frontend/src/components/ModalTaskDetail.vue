@@ -91,6 +91,7 @@ export default {
     changeTaskName: function (id, taskName) {
       // Change the name of the active task
       this.$store.dispatch('changeTaskName', { id, taskName })
+      this.clearForm()
     },
     validateTaskName: function (id, taskName) {
       // Check if new task name is valid before changing
