@@ -60,10 +60,10 @@ describe('ModalTaskDetail.vue', () => {
 
   describe('methods', () => {
     describe('close', () => {
-      it('should clear the newName', () => {
-        wrapper.setData({newName: 'taskname'})
+      it('should clear the taskName', () => {
+        wrapper.setData({taskName: 'taskname'})
         wrapper.find('#close-modal').trigger('click')
-        expect(wrapper.vm.newName).toBe('')
+        expect(wrapper.vm.taskName).toBe('')
       })
 
       it('should call the closeModal mutation', () => {
@@ -72,7 +72,7 @@ describe('ModalTaskDetail.vue', () => {
       })
 
       it('should reset the validator', async () => {
-        wrapper.setData({newName: ''})
+        wrapper.setData({taskName: ''})
         wrapper.find('form').trigger('submit')
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.errors.count()).toBe(1)
@@ -114,10 +114,10 @@ describe('ModalTaskDetail.vue', () => {
         wrapper.vm.editTask = true
       })
 
-      it('should clear the newName', () => {
-        wrapper.setData({newName: 'taskname'})
+      it('should clear the taskName', () => {
+        wrapper.setData({taskName: 'taskname'})
         wrapper.find('#edit-btn[text=cancel]').trigger('click')
-        expect(wrapper.vm.newName).toBe('')
+        expect(wrapper.vm.taskName).toBe('')
       })
 
       it('should set editTask to false', () => {
@@ -137,30 +137,30 @@ describe('ModalTaskDetail.vue', () => {
     })
 
     describe('validateTaskName', () => {
-      it('should throw error if newName is empty', async () => {
-        let nameInput = wrapper.find('input[name=newName]')
-        nameInput.element.newName = ''
+      it('should throw error if taskName is empty', async () => {
+        let nameInput = wrapper.find('input[name=taskName]')
+        nameInput.element.taskName = ''
         wrapper.find('form').trigger('submit')
         await wrapper.vm.$nextTick()
-        expect(wrapper.vm.errors.has('newName')).toBeTruthy()
+        expect(wrapper.vm.errors.has('taskName')).toBeTruthy()
       })
 
-      it('should throw error if newName is too long', async () => {
-        let nameInput = wrapper.find('input[name=newName]')
-        nameInput.element.newName = 'a'.repeat(51)
+      it('should throw error if taskName is too long', async () => {
+        let nameInput = wrapper.find('input[name=taskName]')
+        nameInput.element.taskName = 'a'.repeat(51)
         wrapper.find('form').trigger('submit')
         await wrapper.vm.$nextTick()
-        expect(wrapper.vm.errors.has('newName')).toBeTruthy()
+        expect(wrapper.vm.errors.has('taskName')).toBeTruthy()
       })
 
-      it('should call store changeTaskName dispatch if newName is valid', async () => {
-        wrapper.setData({newName: 'taskname'})
+      it('should call store changeTaskName dispatch if taskName is valid', async () => {
+        wrapper.setData({taskName: 'taskname'})
         wrapper.find('form').trigger('submit')
         await flushPromises()
         expect(wrapper.vm.errors.count()).toBe(0)
         expect(actions.changeTaskName).toHaveBeenCalled()
         expect(actions.changeTaskName.mock.calls[0][1]).toEqual(
-          {id: 1, newName: 'taskname'}
+          {id: 1, taskName: 'taskname'}
         )
       })
     })

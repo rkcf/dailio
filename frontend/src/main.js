@@ -3,6 +3,7 @@ import VeeValidate from 'vee-validate'
 import Normalize from 'normalize.css'
 import App from './App'
 import store from './store/store.js'
+import './ValidateConfig.js'
 
 Vue.use(VeeValidate)
 Vue.use(Normalize)

@@ -25,16 +25,16 @@
       <h4>Last Completed: {{ lastCompleted }}</h4>
     </div>
     <div id="edit-task" v-show="editTask">
-      <form v-on:submit.prevent="validateTaskName(task.task_id, newName)">
+      <form v-on:submit.prevent="validateTaskName(task.task_id, taskName)">
           <input
             v-validate="'required|max:50'"
             placeholder="new task name?"
-            v-model="newName"
-            name="newName"
+            v-model="taskName"
+            name="taskName"
         ><button class="btn">change</button>
         <transition name="fade">
-          <div class="input-danger" v-show="errors.has('newName')">
-            {{ errors.first('newName') }}
+          <div class="input-danger" v-show="errors.has('taskName')">
+            {{ errors.first('taskName') }}
           </div>
         </transition>
       </form>
@@ -64,7 +64,7 @@ export default {
     return {
       confirmDelete: false,
       editTask: false,
-      newName: ''
+      taskName: ''
     }
   },
   computed: {
@@ -88,15 +88,15 @@ export default {
       this.$store.commit('closeModal')
       this.$store.dispatch('deleteTask', id)
     },
-    changeTaskName: function (id, newName) {
+    changeTaskName: function (id, taskName) {
       // Change the name of the active task
-      this.$store.dispatch('changeTaskName', { id, newName })
+      this.$store.dispatch('changeTaskName', { id, taskName })
     },
-    validateTaskName: function (id, newName) {
+    validateTaskName: function (id, taskName) {
       // Check if new task name is valid before changing
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.changeTaskName(id, newName)
+          this.changeTaskName(id, taskName)
         }
       })
     },
@@ -111,7 +111,7 @@ export default {
     },
     clearForm: function () {
       // Clear out the form paramaters and reset the validator
-      this.newName = ''
+      this.taskName = ''
       this.editTask = false
       this.confirmDelete = false
       this.$validator.reset()

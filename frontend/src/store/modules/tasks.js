@@ -38,10 +38,10 @@ const actions = {
         dispatch('getTasks')
       })
   },
-  changeTaskName ({ dispatch, getters }, { id, newName }) {
+  changeTaskName ({ dispatch, getters }, { id, taskName }) {
     // Change a task name with a PATCH
     var fullURL = '/api/tasks/' + id + '/'
-    var payload = '{ "task_name": "' + newName + '" }'
+    var payload = '{ "task_name": "' + taskName + '" }'
     Vue.http.patch(fullURL, payload, {headers: getters.getAuthHeader})
       .then((response) => {
         dispatch('getTasks')
