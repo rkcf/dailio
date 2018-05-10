@@ -18,6 +18,14 @@ class Task(models.Model):
     completion_dates = models.ManyToManyField(CompletionDate)
     # Date maxstreak is completed on
     maxstreak_date = models.DateField(default=date.today)
+    # Order tasks are displayed in
+    order = models.IntegerField()
+
+    def save(self, *args, **kwargs):
+        """Override save to set the order"""
+        if not self.order:
+            self.order = Task.objects.count()
+        super(Task, self).save(*args, **kwargs)
 
     def increment_streak(self):
         """Increase the current task streak and set max streak if necessary"""
