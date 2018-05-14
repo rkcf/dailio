@@ -21,6 +21,12 @@ const actions = {
     Vue.http.get('/api/tasks/', {headers: getters.getAuthHeader})
       .then((response) => {
         commit('setTasks', response.data)
+      }, response => {
+        // error callback
+        if (response.status === 401) {
+          alert('Authorization Error\nLogging out...')
+          commit('logout')
+        }
       })
   },
   addTask ({ commit, dispatch, getters }, taskname) {
@@ -29,26 +35,44 @@ const actions = {
       .then((response) => {
         commit('closeModal')
         dispatch('getTasks')
+      }, response => {
+        // error callback
+        if (response.status === 401) {
+          alert('Authorization Error\nLogging out...')
+          commit('logout')
+        }
       })
   },
-  deleteTask ({ dispatch, getters }, id) {
+  deleteTask ({ commit, dispatch, getters }, id) {
     // Delete a task given its id
     var fullURL = '/api/tasks/' + id + '/'
     Vue.http.delete(fullURL, {headers: getters.getAuthHeader})
       .then((response) => {
         dispatch('getTasks')
+      }, response => {
+        // error callback
+        if (response.status === 401) {
+          alert('Authorization Error\nLogging out...')
+          commit('logout')
+        }
       })
   },
-  changeTaskName ({ dispatch, getters }, { id, taskName }) {
+  changeTaskName ({ commit, dispatch, getters }, { id, taskName }) {
     // Change a task name with a PATCH
     var fullURL = '/api/tasks/' + id + '/'
     var payload = '{ "task_name": "' + taskName + '" }'
     Vue.http.patch(fullURL, payload, {headers: getters.getAuthHeader})
       .then((response) => {
         dispatch('getTasks')
+      }, response => {
+        // error callback
+        if (response.status === 401) {
+          alert('Authorization Error\nLogging out...')
+          commit('logout')
+        }
       })
   },
-  toggleTaskCompletion ({ dispatch, getters }, id) {
+  toggleTaskCompletion ({ commit, dispatch, getters }, id) {
     // Will send a PUT/DELETE to the /done/ endpoint to change task completion state
     var fullURL = '/api/tasks/' + id + '/done/'
     var taskCompletionState = getters.getTaskById(id).task_completed
@@ -56,11 +80,23 @@ const actions = {
       Vue.http.delete(fullURL, {headers: getters.getAuthHeader})
         .then((response) => {
           dispatch('getTasks')
+        }, response => {
+          // error callback
+          if (response.status === 401) {
+            alert('Authorization Error\nLogging out...')
+            commit('logout')
+          }
         })
     } else {
       Vue.http.put(fullURL, {}, {headers: getters.getAuthHeader})
         .then((response) => {
           dispatch('getTasks')
+        }, response => {
+          // error callback
+          if (response.status === 401) {
+            alert('Authorization Error\nLogging out...')
+            commit('logout')
+          }
         })
     }
   },
@@ -75,6 +111,14 @@ const actions = {
           var fullURL = '/api/tasks/' + newTasks[i].task_id + '/'
           var payload = '{ "order": "' + i + '" }'
           Vue.http.patch(fullURL, payload, {headers: getters.getAuthHeader})
+            .then((response) => {
+            }, response => {
+              // error callback
+              if (response.status === 401) {
+                alert('Authorization Error\nLogging out...')
+                commit('logout')
+              }
+            })
           newTasks[i].order = i
         }
       }

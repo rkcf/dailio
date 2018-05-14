@@ -22,6 +22,7 @@ const mutations = {
   },
   logout (state) {
     state.loggedIn = false
+    sessionStorage.removeItem('token')
   },
   login (state) {
     state.loggedIn = true
@@ -45,6 +46,12 @@ const actions = {
       .then((response) => {
         commit('setAuthToken', '')
         commit('logout')
+      }, response => {
+        // error callback
+        if (response.status === 401) {
+          alert('Authorization Error\nLogging out...')
+          commit('logout')
+        }
       })
   }
 }
