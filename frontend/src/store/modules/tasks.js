@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
+import orderBy from 'lodash.orderby'
 
 Vue.use(VueResource)
 
@@ -62,6 +63,24 @@ const actions = {
           dispatch('getTasks')
         })
     }
+  },
+  updateTaskOrder ({ commit, getters }, newTasks) {
+    // Send patches to change task order on backend
+    return new Promise((resolve, reject) => {
+      var oldTasks = getters.getTasks
+      // Loop through tasks looking for changes
+      for (var i = 0; i < newTasks.length; i++) {
+        if (newTasks[i].task_id !== oldTasks[i].task_id) {
+          // Send patch
+          var fullURL = '/api/tasks/' + newTasks[i].task_id + '/'
+          var payload = '{ "order": "' + i + '" }'
+          Vue.http.patch(fullURL, payload, {headers: getters.getAuthHeader})
+          newTasks[i].order = i
+        }
+      }
+      // Return modified order task array so the state can be modified
+      resolve(newTasks)
+    })
   }
 }
 
@@ -73,7 +92,9 @@ const getters = {
   getAuthHeader: (state, rootState) => {
     return {'Authorization': 'Token ' + rootState.authToken}
   },
-  getTasks: state => state.tasks
+  getTasks: (state) => {
+    return orderBy(state.tasks, 'order')
+  }
 }
 
 export default {

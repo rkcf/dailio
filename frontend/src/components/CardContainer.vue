@@ -1,10 +1,12 @@
 <template>
   <div id="card-container">
-    <TaskCard
-      v-for="task in tasks"
-      v-bind:task="task"
-      v-bind:key="task.task_id"
-    />
+    <draggable v-model="tasks" class="draggable">
+      <TaskCard
+        v-for="task in tasks"
+        v-bind:task="task"
+        v-bind:key="task.task_id"
+        />
+    </draggable>
     <button id="task-create-btn" v-on:click="openTaskCreate">
       <svg viewBox="0 0 24 24">
         <path d="M0 0h24v24H0z" fill="none"/>
@@ -16,15 +18,26 @@
 
 <script>
 import TaskCard from './TaskCard'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'CardContainer',
   components: {
-    TaskCard
+    TaskCard,
+    draggable
   },
   computed: {
-    tasks () {
-      return this.$store.getters.getTasks
+    tasks: {
+      get () {
+        return this.$store.getters.getTasks
+      },
+      set (newTasks) {
+        // Update task order on backend and update state on dragging
+        this.$store.dispatch('updateTaskOrder', newTasks)
+          .then((newTasks) => {
+            this.$store.commit('setTasks', newTasks)
+          })
+      }
     }
   },
   mounted: function () {
@@ -56,6 +69,10 @@ export default {
   margin: auto;
   transition: all .5s ease;
   filter: drop-shadow( 2px 2px 2px #ddd);
+}
+
+.draggable {
+  display: contents;
 }
 
 #task-create-btn:hover {

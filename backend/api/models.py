@@ -19,11 +19,11 @@ class Task(models.Model):
     # Date maxstreak is completed on
     maxstreak_date = models.DateField(default=date.today)
     # Order tasks are displayed in
-    order = models.IntegerField()
+    order = models.IntegerField(blank=True)
 
     def save(self, *args, **kwargs):
         """Override save to set the order"""
-        if not self.order:
+        if self.order is None:
             self.order = Task.objects.count()
         super(Task, self).save(*args, **kwargs)
 
