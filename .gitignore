@@ -11,6 +11,8 @@ __pycache__/
 .DS_Store
 node_modules/
 npm-debug.log*
-/test/unit/coverage/
-/test/e2e/reports/
+frontend/test/unit/coverage/
+frontend/test/e2e/reports/
 selenium-debug.log
+frontend/webpack-stats.json
+
