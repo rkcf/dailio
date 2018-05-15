@@ -1,13 +1,16 @@
 <template>
   <div id="app">
     <transition name="fade">
+      <ModalLogin v-if="!loggedIn"/>
+    </transition>
+    <transition name="fade">
       <ModalTaskCreate v-show="showModal === 'create'"/>
     </transition>
     <transition name="fade">
       <ModalTaskDetail v-if="showModal === 'detail'"/>
     </transition>
     <transition name="fade">
-      <ModalLogin v-if="!loggedIn"/>
+      <ModalSettings v-show="showModal === 'settings'"/>
     </transition>
     <div id="header" class="raised">
       <button id="menu-btn" v-on:click="toggleMenu">
@@ -31,6 +34,7 @@ import CardContainer from './components/CardContainer'
 import ModalTaskCreate from './components/ModalTaskCreate'
 import ModalTaskDetail from './components/ModalTaskDetail'
 import ModalLogin from './components/ModalLogin'
+import ModalSettings from './components/ModalSettings'
 import MainMenu from './components/MainMenu'
 
 export default {
@@ -40,6 +44,7 @@ export default {
     ModalTaskCreate,
     ModalTaskDetail,
     ModalLogin,
+    ModalSettings,
     MainMenu
   },
   created () {

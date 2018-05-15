@@ -1,6 +1,9 @@
 <template>
   <div id="main-menu" class="raised">
-    <button id="logout-btn" v-on:click="logout">
+    <button v-on:click="openSettings">
+      settings
+    </button>
+    <button v-on:click="logout">
       logout
     </button>
   </div>
@@ -13,6 +16,10 @@ export default {
     logout () {
       this.$emit('closeMenu')
       this.$store.dispatch('logout')
+    },
+    openSettings () {
+      this.$emit('closeMenu')
+      this.$store.dispatch('openModal', 'settings')
     }
   }
 }
