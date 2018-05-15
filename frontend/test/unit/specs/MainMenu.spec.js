@@ -13,7 +13,8 @@ describe('MainMenu.vue', () => {
 
   beforeEach(() => {
     actions = {
-      logout: jest.fn()
+      logout: jest.fn(),
+      openModal: jest.fn()
     }
 
     store = new Vuex.Store({ actions })
@@ -30,9 +31,23 @@ describe('MainMenu.vue', () => {
         wrapper.find('#logout-btn').trigger('click')
         expect(actions.logout).toHaveBeenCalled()
       })
+
       it('should emit closeMenu', () => {
         wrapper.find('#logout-btn').trigger('click')
         expect(wrapper.emitted().closeMenu).toBeTruthy()
+      })
+    })
+
+    describe('openSettings', () => {
+      it('should emit closeMenu', () => {
+        wrapper.find('#settings-btn').trigger('click')
+        expect(wrapper.emitted().closeMenu).toBeTruthy()
+      })
+
+      it('should call store openModal action', () => {
+        wrapper.find('#settings-btn').trigger('click')
+        expect(actions.openModal).toHaveBeenCalled()
+        expect(actions.openModal.mock.calls[0][1]).toEqual('settings')
       })
     })
   })

@@ -1,9 +1,9 @@
 <template>
   <div id="main-menu" class="raised">
-    <button v-on:click="openSettings">
+    <button id="settings-btn" v-on:click="openSettings">
       settings
     </button>
-    <button v-on:click="logout">
+    <button id="logout-btn" v-on:click="logout">
       logout
     </button>
   </div>
