@@ -35,6 +35,9 @@ class TaskCompletion(generics.GenericAPIView):
     def put(self, request, *args, **kwargs):
         """Set task_completed to true"""
         instance = self.get_object()
+        if instance.task_completed is True:
+            # If task is already completed, return 409 conflict
+            return Response(status=409)
         serializer = self.get_serializer(instance, data=request.data)
         serializer.is_valid()
         serializer.save(task_completed=True)
@@ -44,6 +47,9 @@ class TaskCompletion(generics.GenericAPIView):
     def delete(self, request, *args, **kwargs):
         """Set task_completed to false"""
         instance = self.get_object()
+        if instance.task_completed is False:
+            # If task is already incomplete, return 409 conflict
+            return Response(status=409)
         serializer = self.get_serializer(instance, data=request.data)
         serializer.is_valid()
         serializer.save(task_completed=False)
