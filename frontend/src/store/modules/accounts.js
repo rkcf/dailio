@@ -6,7 +6,8 @@ Vue.use(VueResource)
 const state = {
   authToken: '',
   loginError: '', // error messages associated with login error
-  loggedIn: false
+  loggedIn: false,
+  vacationState: true
 }
 
 const mutations = {
@@ -26,6 +27,9 @@ const mutations = {
   },
   login (state) {
     state.loggedIn = true
+  },
+  setVacationState (state, value) {
+    state.vacationState = value
   }
 }
 
@@ -53,13 +57,54 @@ const actions = {
           commit('logout')
         }
       })
+  },
+  getAccountSettings ({ commit, getters }) {
+    // get and set in state user account settings
+    Vue.http.get('/account/settings/', {headers: getters.getAuthHeader})
+      .then((response) => {
+        commit('setVacationState', response.data.vacation)
+      }, response => {
+        // error callback
+        if (response.status === 401) {
+          alert('Authorization Error\nLogging out...')
+          commit('logout')
+        }
+      })
+  },
+  toggleVacationState ({ commit, getters }, id) {
+    // Will send a PUT/DELETE to the account/settings/vacation/ endpoint to toggle state
+    var vacationState = getters.vacationState
+    if (vacationState) {
+      Vue.http.delete('/account/settings/vacation/', {headers: getters.getAuthHeader})
+        .then((response) => {
+          commit('setVacationState', false)
+        }, response => {
+          // error callback
+          if (response.status === 401) {
+            alert('Authorization Error\nLogging out...')
+            commit('logout')
+          }
+        })
+    } else {
+      Vue.http.put('/account/settings/vacation/', {}, {headers: getters.getAuthHeader})
+        .then((response) => {
+          commit('setVacationState', true)
+        }, response => {
+          // error callback
+          if (response.status === 401) {
+            alert('Authorization Error\nLogging out...')
+            commit('logout')
+          }
+        })
+    }
   }
 }
 
 const getters = {
   authToken: state => state.authToken,
   loggedIn: state => state.loggedIn,
-  loginError: state => state.loginError
+  loginError: state => state.loginError,
+  vacationState: state => state.vacationState
 }
 
 export default {

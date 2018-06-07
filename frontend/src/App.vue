@@ -10,7 +10,7 @@
       <ModalTaskDetail v-if="showModal === 'detail'"/>
     </transition>
     <transition name="fade">
-      <ModalSettings v-show="showModal === 'settings'"/>
+      <ModalSettings v-if="showModal === 'settings'"/>
     </transition>
     <div id="header" class="raised">
       <button id="menu-btn" v-on:click="toggleMenu">
@@ -115,6 +115,10 @@ input {
   border: 1px #ddd solid;
   width: 10rem;
   margin-bottom: 1rem;
+}
+
+[type=checkbox] {
+  width: 1rem;
 }
 
 .btn {

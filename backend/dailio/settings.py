@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'rest_framework.authtoken',
     'rest_auth',
+    'accounts',
     'api'
 ]
 

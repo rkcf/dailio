@@ -4,6 +4,10 @@
       <h2>settings</h2>
     </div>
     <div id="modal-body">
+      <span>
+        <input type="checkbox" id="vacationCheck" v-model="vacationState">
+        <label for="vacationCheck">Vacation Mode</label>
+      </span>
     </div>
   </ModalContainer>
 </template>
@@ -16,8 +20,22 @@ export default {
   components: {
     ModalContainer
   },
+  mounted () {
+    // Dispatch request to get account settings from API
+    this.$store.dispatch('getAccountSettings')
+  },
+  computed: {
+    vacationState: {
+      get () {
+        return this.$store.getters.vacationState
+      },
+      set () {
+        this.$store.dispatch('toggleVacationState')
+      }
+    }
+  },
   methods: {
-    close: function () {
+    close () {
       // Close out the modal
       this.$store.commit('closeModal')
     }
