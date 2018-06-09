@@ -14,12 +14,15 @@ class TaskTests(APITestCase):
         # Create test user
         User.objects.create(username='testuser', password='testpassword')
 
-        Task.objects.create(task_name="test_name1", task_streak=5,
+        Task.objects.create(task_name="test_name1",
+                            task_streak=5,
                             task_maxstreak=5)
 
         # Create a task with a completion date to test uncompleting
         task_obj = Task.objects.create(task_name="test_name2",
-                                       task_streak=5, task_maxstreak=5)
+                                       task_streak=5,
+                                       task_maxstreak=5,
+                                       task_completed=True)
         date_obj = CompletionDate.objects.create()
         task_obj.completion_dates.add(date_obj)
 
