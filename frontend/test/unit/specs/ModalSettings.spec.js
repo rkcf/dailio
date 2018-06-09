@@ -10,6 +10,7 @@ localVue.use(Vuex)
 describe('ModalSettings.vue', () => {
   let wrapper
   let mutations
+  let actions
   let store
 
   beforeEach(() => {
@@ -17,8 +18,14 @@ describe('ModalSettings.vue', () => {
       closeModal: jest.fn()
     }
 
+    actions = {
+      getAccountSettings: jest.fn(),
+      toggleVacationState: jest.fn()
+    }
+
     store = new Vuex.Store({
-      mutations
+      mutations,
+      actions
     })
 
     wrapper = mount(ModalSettings, { localVue, store })
@@ -27,6 +34,19 @@ describe('ModalSettings.vue', () => {
   describe('mounted', () => {
     it('should mount ModalContainer child', () => {
       expect(wrapper.contains(ModalContainer)).toBeTruthy()
+    })
+
+    it('should dispatch getAccountSettings', () => {
+      expect(actions.getAccountSettings).toHaveBeenCalled()
+    })
+  })
+
+  describe('computed', () => {
+    describe('vacationSate', () => {
+      it('should call toggleVacationState dispatch upon checkbock click', () => {
+        wrapper.find('#vacationCheck').trigger('click')
+        expect(actions.toggleVacationState).toHaveBeenCalled()
+      })
     })
   })
 
