@@ -4,6 +4,9 @@ devserver:
 testapi:
 	cd backend && python manage.py test
 
+apicoverage:
+	cd backend && coverage run --source='.' manage.py test
+
 migrations:
 	cd backend && python manage.py makemigrations && python manage.py migrate
 
