@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import App from '@/App'
 import sessionStorage from 'jest-localstorage-mock'
 
@@ -34,7 +34,7 @@ describe('App.vue', () => {
       getters
     })
 
-    wrapper = shallow(App,
+    wrapper = shallowMount(App,
       { store,
         localVue
       })

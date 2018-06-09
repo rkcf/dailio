@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import CardContainer from '@/components/CardContainer'
 
 const localVue = createLocalVue()
@@ -28,7 +28,7 @@ describe('CardContainer.vue', () => {
       getters
     })
 
-    wrapper = shallow(CardContainer,
+    wrapper = shallowMount(CardContainer,
       { store,
         localVue
       })

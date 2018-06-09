@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import TaskCard from '@/components/TaskCard'
 
 const localVue = createLocalVue()
@@ -34,7 +34,7 @@ describe('TaskCard.vue', () => {
       mutations
     })
 
-    wrapper = shallow(TaskCard,
+    wrapper = shallowMount(TaskCard,
       { propsData: {task: store.state.tasks[0]},
         store,
         localVue

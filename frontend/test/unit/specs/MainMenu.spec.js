@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import MainMenu from '@/components/MainMenu'
 
 const localVue = createLocalVue()
@@ -19,7 +19,7 @@ describe('MainMenu.vue', () => {
 
     store = new Vuex.Store({ actions })
 
-    wrapper = shallow(MainMenu,
+    wrapper = shallowMount(MainMenu,
       { store,
         localVue
       })

@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import ModalContainer from '@/components/ModalContainer'
 
 const localVue = createLocalVue()
@@ -7,7 +7,7 @@ describe('ModalContainer.vue', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = shallow(ModalContainer, { localVue })
+    wrapper = shallowMount(ModalContainer, { localVue })
   })
 
   describe('methods', () => {
